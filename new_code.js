@@ -20,7 +20,7 @@ const CONFIG = {
 
   UCHAT: {
     ENDPOINT: "https://www.uchat.com.au/api/subscriber/send-content",
-    DELIVERY_MESSAGE: `Амар байна уу, үр минь {{NAME}}? 🔮\n\nУдган ээж нь чиний "Зүрхний хүрдийн заяаны төөрөг"-ийг үзээд дууслаа.\n\nДоорх судар дээр дарж, заяа тавилангийнхаа нууцыг олж уншаарай. 👇`,
+    DELIVERY_MESSAGE: `Амар байна уу, {{NAME}}? 🔮\n\nТаны "Зүрхний хүрдийн үйлийн үрийн тайлал" бэлэн боллоо.\n\nДоорх судар дээр дарж, заяа тавилангийнхаа нууцыг олж уншаарай. 👇`,
     DELIVERY_BTN_TEXT: "📜 Заяаны судар хүлээн авах"
   },
 
@@ -414,12 +414,6 @@ function normalizeInputWithAI(raw, key) {
 // ==========================================
 function generateSequentialReport(data, apiKey) {
 
-  const header = `
-👤 ХАРИЛЦАГЧИЙН ӨГӨГДӨЛ: ${data.name} | ${data.gender} | ${data.dob}
-🔢 Амьдралын зам: ${data.lifePath} | Өдрийн тоо: ${data.dayNumber}
-📊 Матриц: ${data.matrixStr} | Дутуу тоо: ${data.missing.join(', ') || 'Байхгүй'}
-`;
-
   const SYSTEM_PROMPT = `
   ROLE: You are a highly intuitive, wise Mongolian Shaman (Удган) who specializes in destiny, karma, and love numerology. Tone: Mystical, Grounded, and Wise. You act as a spiritual guide reading their destiny, using ancient Mongolian phrasing (e.g., заяа тавилан, төөрөг, хүрд, мандал, үйл).
   LANGUAGE: Proper Mongolian Cyrillic ONLY. STRICTLY NO KOREAN OR ENGLISH WORDS (Translate "vibration/frequency" to "эрчим/мандал").
@@ -553,7 +547,7 @@ function generateSequentialReport(data, apiKey) {
   const r5 = callGeminiAPI(prompt5, apiKey, CONFIG.TEMPERATURE);
 
   return {
-    text: header.trim() + "\n\n" + r1.text.trim() + "\n\n" + r2.text.trim() + "\n\n" + r3.text.trim() + "\n\n" + r4.text.trim() + "\n\n" + r5.text.trim(),
+    text: r1.text.trim() + "\n\n" + r2.text.trim() + "\n\n" + r3.text.trim() + "\n\n" + r4.text.trim() + "\n\n" + r5.text.trim(),
     usage: (r1.usage||0) + (r2.usage||0) + (r3.usage||0) + (r4.usage||0) + (r5.usage||0)
   };
 }
