@@ -30,62 +30,68 @@ const CONFIG = {
   REFERENCES: {
     PART_1: `I ХЭСЭГ ЗҮРХНИЙ ХҮРДИЙН ТӨӨРӨГ
 Заяагдсан араншин
-Үр минь, удган ээж нь чиний төрсөн өдрийн мөрөөр хөөж үзвээс, амьдралын замын тоо чинь 1-ийн хүрдээр эргэлдэж байна. Энэ нь чамайг энэ насанд хайр сэтгэлийн мандал дор "Өөрийнхөөрөө зүтгэгч, тэргүүлэгч" гэсэн сүлдтэй бууж ирснийг илтгэж байна даа. Хайр дурлалын ертөнцөд чи өөрийнхөө бодол санааг өмнөө тавьж, амьдралын жолоог гартаа атгах заяатай төрсөн хүн юм. Хайр гэдэг чиний хувьд зүгээр л нэг сэтгэл хөдлөл биш, харин хамтдаа нэгэн зүгт тэмүүлэх бат бэх түшиг, нөхөрлөл билээ. Гэвч энэ хүчтэй араншингаас чинь болоод заримдаа ханийнхаа үгийг сонсохгүй дарах, өөрийнхөөрөө зүтгэх бардам зан гарч ирэх гээд байдаг гэмийг анзаарч, тэнцвэрийг нь тааруулж яваарай, үр минь.
+Төрсөн өдрийн чинь мөрөөр хөөж үзвээс, амьдралын замын тоо чинь 1-ийн хүрдээр эргэлдэж байна. Энэ нь чамайг энэ насанд хайр сэтгэлийн мандал дор "Өөрийнхөөрөө зүтгэгч, тэргүүлэгч" гэсэн сүлдтэй бууж ирснийг илтгэж байна даа. Хайр дурлалын ертөнцөд чи өөрийнхөө бодол санааг өмнөө тавьж, амьдралын жолоог гартаа атгах заяатай төрсөн хүн юм. Хайр гэдэг чиний хувьд зүгээр л нэг сэтгэл хөдлөл биш, харин хамтдаа нэгэн зүгт тэмүүлэх бат бэх түшиг, нөхөрлөл билээ. Гэвч энэ хүчтэй араншингаас чинь болоод заримдаа ханийнхаа үгийг сонсохгүй дарах, өөрийнхөөрөө зүтгэх бардам зан гарч ирэх гээд байдаг гэмийг анзаарч, тэнцвэрийг нь тааруулж яваарай.
 
-Матрицын тоон өгөгдөл ба тайлал
-Пифагорын 9 нүдэн мандалд чиний тоонууд ингэж бууж байна даа: 1:3 | 2:2 | 3:0 | 4:0 | 5:1 | 6:0 | 7:0 | 8:2 | 9:0. Эдгээр тоонууд чиний сүнсний гүнд хэрхэн нөлөөлдгийг ээж нь хэлээд өгье. Нэгдүгээрт, чиний мандалд нэгийн тоо гурвантаа давтагдсан нь чамд тэнгэрээс өгөгдсөн маш хүчтэй манлайлах эрч хүчийг хуримтлуулж байна. Энэ нь чамайг бусдын дор орох дургүй, бие даасан хүчирхэг нэгэн болгож байгаа хэрэг. Аливаад чи өөрийнхөө шийдвэрээр хандаж, түүндээ хүрэх гэж уйгагүй зүтгэдэг сайн талтай. Гэвч хайр дурлалын харилцаанд энэ их хүч чинь савнаасаа халивал, ханиа өөрийн эрхгүй дарамтлах, эсвэл дорой амьтныг голох сүүдэр дагуулдаг тул дотоод сэтгэлээ шинжиж, ханиа энэрэн хайрлах ухааныг сурах хэрэгтэй байна даа.
+Сүнсний өгөгдөл
+Пифагорын 9 нүдэн мандалд чиний тоонууд ингэж бууж байна даа: 1:3 | 2:2 | 3:0 | 4:0 | 5:1 | 6:0 | 7:0 | 8:2 | 9:0. Эдгээр тоонууд чиний сүнсний гүнд хэрхэн нөлөөлдгийг хэлээд өгье. Нэгдүгээрт, чиний мандалд нэгийн тоо гурвантаа давтагдсан нь чамд тэнгэрээс өгөгдсөн маш хүчтэй манлайлах эрч хүчийг хуримтлуулж байна. Энэ нь чамайг бусдын дор орох дургүй, бие даасан хүчирхэг нэгэн болгож байгаа хэрэг. Аливаад чи өөрийнхөө шийдвэрээр хандаж, түүндээ хүрэх гэж уйгагүй зүтгэдэг сайн талтай. Гэвч хайр дурлалын харилцаанд энэ их хүч чинь савнаасаа халивал, ханиа өөрийн эрхгүй дарамтлах, эсвэл дорой амьтныг голох сүүдэр дагуулдаг тул дотоод сэтгэлээ шинжиж, ханиа энэрэн хайрлах ухааныг сурах хэрэгтэй байна даа.
 
 Хайрын хэлний учир
 Чиний төрсөн өдөрт 3-ын тооны эрчим оршиж байгаа нь чиний зүрхний хэл бол "Сэтгэлийн үг, урам зориг" гэдгийг харуулж байна. Хайртай хүнтэйгээ чи сэтгэлээ онгойтол ярилцаж, ойлголцохыг туйлаас хүсдэг хүн юм. Үнэтэй ховор эд хөрөнгөнөөс илүүтэй, оройн намуунд чамтай хууч хөөрч, мөрөөдлийг чинь хуваалцаж, урам хайрладаг хүнд л чиний зүрх уяран хайлна. Хэрвээ ханилсан хүн чинь дуугай, дотогшоо эсвэл чиний үгийг эс тоовол чи тэр гэрт ганцаардаж, гомдож эхэлдэг учиртай. Тиймээс чиний зүрхний түлхүүр бол харилцан яриа бөгөөд чамайг чин сэтгэлээсээ сонсох тэр л хүн чиний заяаны хань мөнөөсөө мөн.`,
 
-    PART_2: `II ХЭСЭГ ҮЙЛИЙН ҮР БА СЭРЭМЖЛҮҮЛЭГ
+    PART_2: `II ХЭСЭГ ҮЙЛИЙН ҮР БА ГАЦАА
 Кармын өр
-Үр минь, удган ээж нь чиний төрсөн он сар өдрийг судалж үзэхнээ 13, 14, 16, 19 гэсэн урьд насны хар нүгэл, үйлийн үрийн тоо алга байна. Үүнийг бид "Цагаан цаас шиг цэвэр үйлийн үр" гэж дууддаг юм. Энэ нь чи урьд насандаа хүний сэтгэл шархлуулж, өрх гэрийн үймээн тариагүй, буян хишигтэй явсныг илтгэж байна. Чамд ямар нэгэн удам дамжсан хараал, гэрлэлтийн бүтэлгүйтэл заяагдаагүй бөгөөд чиний өнөөдрийн ганц бие яваа чинь зөвхөн чиний өөрийн чинь л шийдвэр юм шүү дээ.
+Төрсөн он сар өдрийг чинь судалж үзэхнээ 13, 14, 16, 19 гэсэн урьд насны хар нүгэл, үйлийн үрийн тоо алга байна. Үүнийг "Цагаан цаас шиг цэвэр үйлийн үр" гэж дууддаг юм. Энэ нь чи урьд насандаа хүний сэтгэл шархлуулж, өрх гэрийн үймээн тариагүй, буян хишигтэй явсныг илтгэж байна. Чамд ямар нэгэн удам дамжсан хараал, гэрлэлтийн бүтэлгүйтэл заяагдаагүй бөгөөд чиний өнөөдрийн ганц бие яваа чинь зөвхөн чиний өөрийн чинь л шийдвэр юм шүү дээ.
 
-Цоорхой тоо буюу гацаа
+Төөргийн гацаа
 Чиний мандалд 3, 4, 6, 7, 9-ийн тоонууд дутаж байна. Энэ нь чиний хайр дурлалын замд дараах бартаануудыг үүсгээд байна даа. Нэгдүгээрт, 3-ын тоо дутсанаас чи доторх үгээ хүнд хэлж чадахгүй, сэтгэлээ нээхдээ хойрго хандах гэмтэй. Хайрын хэл чинь яриа хөөрөө мөртлөө өөрөө эгзэгтэй үед дуугүй болчихдог нь ханиасаа хөндийрөх шалтгаан болдог. Хоёрдугаарт, 4-ийн тоо дутсан нь харилцаанд тогтвор суурьшил, хариуцлага дутаж мэдэх дохио өгч байна. Гуравдугаарт, 6-ийн тоо дутсан нь чи хайр сэтгэлд умбахдаа өөрийгөө умартаж, ханиасаа хэт хамааралтай болох, эсвэл өөрийгөө хайрлуулах эрхгүй хүн мэт дорд үзэх аюултайг анхааруулж байна.
 
-Сэтгэлийн гацаа
-Чиний хайр дурлалд тохиолдож буй хамгийн том чөдөр бол амьдралын замын 1-ийн тооноос үүдэлтэй "Хэт төгс рүү тэмүүлэх хүсэл", мөн 9-ийн тоо дутсанаас үүдэлтэй "Өнгөрснөөсөө зууралдах" өвчин хоёр нийлснээс болж байна. Чи дотроо ирээдүйн ханиа маш өндөр хэмжүүрээр зурж төсөөлөхөөс гадна, өнгөрсөнд учирч байсан тэр нэгэн хүний сүүдрээс одоо хэр нь салж чадахгүй л яваа юм байна даа. Шинээр танилцсан хүнээ хүртэл тэрхүү дурсамжтайгаа харьцуулж, голж шилээд байгаа чинь шинэ заяаны үүдийг хааж байна. Өнгөрснийг тавьж явуулахгүйгээр шинэ хувь заяа ирэхгүй гэдгийг ухаарах хэрэгтэй.
+Эрчмийн харшил
+Амьдралын зам 1, мандалд нэгийн тоо гурвантаа орсон, дээр нь өдрийн 3-ын тоотой нийлээд чамд дараах төрлийн хүмүүс хамгийн их гай барцад авчирна гэдгийг сануулъя. Хамгийн түрүүнд, чамайг захирч, бүхнийг гартаа оруулах гэсэн дарангуйлагч хүнээс хол яв. Чи өөрөө маш хүчтэй заяатай ч, тийм хүнтэй учирвал өөрийн үнэ цэнээ алдаж, түүний аяст орж гээгдэх аюултай. "Минийхээр л бай" гэж тулгадаг хүмүүс чиний сүнсийг боомилж мэднэ. Энэ төрлийн хүмүүс ихэвчлэн сарын 8, 17, 26-ны өдөр төрсөн байх нь олонтаа тул тийм хүмүүстэй харилцахдаа сонор сэрэмжтэй байж, өөрийн орон зайгаа хамгаалж яваарай.
 
-Эрчмийн харшил ба аюулын дохио
-Амьдралын зам 1, мандалд нэгийн тоо гурвантаа орсон, дээр нь өдрийн 3-ын тоотой нийлээд чамд дараах төрлийн хүмүүс хамгийн их гай барцад авчирна гэдгийг удган ээж нь сануулъя. Хамгийн түрүүнд, чамайг захирч, бүхнийг гартаа оруулах гэсэн дарангуйлагч хүнээс хол яв. Чи өөрөө маш хүчтэй заяатай ч, тийм хүнтэй учирвал өөрийн үнэ цэнээ алдаж, түүний аяст орж гээгдэх аюултай. "Минийхээр л бай" гэж тулгадаг хүмүүс чиний сүнсийг боомилж мэднэ. Энэ төрлийн хүмүүс ихэвчлэн сарын 8, 17, 26-ны өдөр төрсөн байх нь олонтаа тул тийм хүмүүстэй харилцахдаа сонор сэрэмжтэй байж, өөрийн орон зайгаа хамгаалж яваарай.`,
+Аз уу, сорилт уу?
+Ганц бие яваа энэ хугацааг чи шийтгэл гэж битгий бод. Үнэн хэрэгтээ чиний энэ зожиг, шаардлага өндөртэй байдал нь тэнгэрээс чамд өөрийгөө таньж, дотоод хүчээ олох гэж өгсөн том аз, завшаан юм. Чи хүн бүртэй таарах амархан сүнс биш учраас өөрийнхөө мөн чанарт нийцэх тэр л нэгнийг хүлээж байгаа нь чиний гүн гүнзгий дотоод мэдрэмжийн илрэл юм. Тиймээс энэ бол заяаны муу биш, харин жинхэнэ хайрыг угтах бэлтгэл цаг хугацаа билээ.`,
 
     PART_3: `III ХЭСЭГ ЗАЯАНЫ ХАНИЙН ДҮР
-Сүнсний зохицол
-Удган ээж нь чиний төөргийг уншиж байхад, чамд заяасан хань чинь чиний дотоод ертөнцийг зөөлрүүлж, дутууг чинь гүйцээх хүн байх нь тодорхой байна. Амьдралын зам 1 болоод 1-ийн тоо гурвантаа орсон нь чамайг бардам, өөрийнхөөрөө, шийдмэг нэгэн гэдгийг гэрчилж байна. Тийм учраас чамд өөр шиг чинь ноёлох гэсэн хүн таарвал тэр гэр бүлд хэрүүл тэмцэл тасрахгүй. Харин чиний дутуу 3, 4, 6, 7, 9 тоонуудын эрчмийг нөхөх тайван, уян зөөлөн, халамжтай хүн л чиний заяаны хань юм. Тэр хүн чамайг сонсдог, дотоод хүчийг чинь хүндэлдэг хэрнээ чамайг тайвшруулж, нөмөр нөөлөг болж чадна. Түүний дэргэд чи өөрийгөө таньж, өнгөрсөн гомдлоо арилгах болно доо.
+Сүнсний зохицол ба Зан чанар
+Төөргийг чинь уншиж байхад, чамд заяасан хань чинь чиний дотоод ертөнцийг зөөлрүүлж, дутууг чинь гүйцээх эмэгтэй хүн байх нь тодорхой байна. Чиний бардам, өөрийнхөөрөө байдлыг зөөллөх, тайван амгалан, халамжтай хүн л чиний заяаны хань юм. Тэр эмэгтэй чамайг сонсдог, дотоод хүчийг чинь хүндэлдэг хэрнээ чамайг тайвшруулж, өрх гэрт дулаан илч авчирна. Түүний дэргэд чи өөрийгөө таньж, өнгөрсөн гомдлоо арилгах болно доо.
 
-Ажил үйлс ба нэр хүнд
-Заяаны ханийн чинь ажил үйлс нь эрх мэдэл хөөцөлдсөн биш, харин олон түмэнд тус хүргэдэг, сэтгэлийн урлалтай хүн байх магадлалтай байна. Багш, эмч, сэтгэл судлаач эсвэл урлагийн нарийн ухаантай хүн ч байж мэднэ. Тэр хүн хийж буй үйлээ зүгээр нэг мөнгөний төлөө бус, бусдад тус болох гэсэн цагаан сэтгэлээр хийдэг байх нь чухал. Санхүүгийн хувьд өлсөхгүй, гэхдээ амьдралынхаа бүх цагийг ажилд зарахгүй, чамд болон гэр бүлдээ цаг зав гаргадаг, амьдралын дэнсийг тэгш барьдаг хүн л чиний 4-ийн тооны дутууг нөхөж, өрх гэрт чинь амар амгаланг авчирна.
+Гадаад төрхийн шинж
+Заяаны ханийн чинь царай төрх нь дотоод сүнснийх нь тусгал мэт дулаахан, дөлгөөн байх болно. Мэлмэрсэн хар эсвэл гүн бор нүдтэй, нүднийх нь гүнд нинжин сэтгэл гэрэлтсэн, харц нь тогтуун нэгэн байна. Бие галбир нь хэтэрхий туранхай эсвэл бадриун биш, монгол бүсгүйн унаган бие цогцостой, хөдөлгөөн нь төлөв даруу, алхаа нь аядуу зөөлөн байна. Инээмсэглэл нь өглөөний нар мэт гэрэлтсэн, үг хэллэг нь хүний сэтгэлд хүрдэг, цэвэр цэмцгэр байдлыг эрхэмлэдэг бүсгүй байх нь ээ. Түүний дэргэд байхад цаанаасаа л нэг нөмөртэй, амар амгалан мэдрэгдэх болно.
 
-Ивээл өдрүүд буюу Алтан тоо
-Чиний заяатай хамгийн сайн нийцэх хүний төрсөн өдөр нь сарын 6, 15, 24-ний өдрүүд байх нь машид ивээлтэй. Ялангуяа 6-гийн тоотой энэ хүмүүс чиний дутуу 6-гийн тоог гүйцээж, чамд халамж, хайр, гэр бүлийн халуун дулааныг бэлэглэх болно. Мөн сарын 2, 11, 20, 29-нд төрсөн 2-ын тооны хүмүүс чиний 1-ийн тоотой маш сайн зохицож, нэг нь удирдаж, нөгөөх нь уян хатан дагаж, амьдралыг тэгшитгэх болно. Эдгээр өдрүүдэд төрсөн хүмүүс чиний амьдралын замыг гэрэлтүүлэх хувьтай хүмүүс юм.`,
+Эд хөрөнгө ба Ажил үйлс
+Түүний хийх ажил үйлс нь эрх мэдэл хөөцөлдсөн биш, харин бусдын бие сэтгэлийг анагаагч, эсвэл гарын уртай, тооцоо данс барьдаг нягт хүн байх магадлалтай байна. Тэрээр хийж буй үйлээ зүгээр нэг мөнгөний төлөө бус, бусдад тус болох гэсэн цагаан сэтгэлээр хийдэг байх нь чухал. Эд хөрөнгийн хувьд цаанаасаа их баян тарган биш ч, амьдралын ухаантай, арвич хямгач зангийнхаа хүчээр өрх гэрээ дүүрэн авч явна. Та хоёр хамтдаа зүтгэж байж л амьдралын дэнсийг тэгш барьж, дутуугаа нөхөж, хөрөнгө зоорь хураах заяатай.
 
-    PART_4: `IV ХЭСЭГ ХУВЬ ЗАЯАНЫ 3 ЖИЛИЙН ЗУРАГЛАЛ
-2026 он: Ариусгал ба Төгсгөл
-Үр минь, чиний 2026 оны хувийн жилийн төөргийг буулгавал 9-ийн тооны мөчлөгт шилжиж байна. Энэ нь чиний хайр сэтгэлийн амьдралд "Их ариусгал" хийгдэх онцгой жил байх нь ээ. Мандалд чинь 9-ийн тоо дутуу байгаагаас чи өнгөрсөн гомдлыг тээж явдаг бол, энэ онд тэр бүх сүүдрээс салж, дотоод сэтгэлээ ариусгах болно. Чамд тус болохоо больсон хуучин харилцаа, муу дадал зуршил энэ жил дуусгавар болно. Үүнийг хагацал гэж битгий гунь, харин шинэ замд бэлтгэж буй тэнгэрийн цэвэрлэгээ гэж ухаараарай.
+Насны эрчим ба Алтан тоо
+Чиний заяатай хамгийн сайн нийцэх эмэгтэй нь чамаас хэд дүү, эсвэл чацуудуу насны хүн байх магадлал өндөр байна. Сарын 6, 15, 24-ний өдрүүдэд төрсөн хүмүүс нь машид ивээлтэй. Ялангуяа 6-гийн тоотой энэ хүмүүс чиний дутуу 6-гийн тоог гүйцээж, чамд халамж, хайр, гэр бүлийн халуун дулааныг бэлэглэх болно. Мөн сарын 2, 11, 20, 29-нд төрсөн хүмүүс нь чиний амьдралын замыг гэрэлтүүлэх хувьтай бөгөөд нэг нь удирдаж, нөгөөх нь уян хатан дагаж, амьдралыг тэгшитгэх болно.`,
 
-2027 он: Шинэ мандал
-Дараагийн жил буюу 2027 онд чи 1-ийн тооны мөчлөгт орно. Энэ бол амьдралын шинэ хуудас, шинэ эхлэл юм. Өнгөрсөн оны ариусгалын дараа чи цоо шинэ эрч хүчтэйгээр хайр дурлалын замд алхах болно. Чиний амьдралын зам 1 учраас энэ жилийн эрчим чамтай маш сайн нийцэж, хүссэн харилцаагаа бүтээхэд чинь дэм өгнө. Энэ онд чи заяаны ханьтайгаа учрах, эсвэл одоо байгаа харилцаагаа улам бат бэх болгох сайхан боломж хүлээж байна. Өөрийгөө зоригтой нээж, шинэ хайрыг угтаж аваарай.
+    PART_4: `IV ХЭСЭГ УЧРАЛЫН ЦАГ ХУГАЦАА
+Хэдийнээ учирсан уу?
+Өнгөрсөн он жилүүдийн эрчмийг уншиж байхад, чиний заяаны хань аль хэдийнэ чиний амьдралын тойрогт орж ирсэн, эсвэл өмнө нь таарч байсан хүн байх магадлал өндөр байна. Магадгүй тэр үед та хоёрын сүнсний цаг нь болоогүйгээс зөрөөд өнгөрсөн байж мэднэ. Эргэн тойрноо, хуучны танилуудаа сайн нэг анзаараад үзээрэй, заяаны утас нь хэдийнээ холбогдсон хэрнээ чи анзаараагүй яваа ч юм билүү.
 
-2028 он: Итгэлцэл ба Нэгдэл
-2028 он бол чиний хувьд 2-ын тооны мөчлөг буюу "Харилцан ойлголцол, нэгдэл"-ийн жил байх болно. Өмнөх онд эхлүүлсэн харилцаа чинь энэ жил илүү гүнзгийрч, бие биедээ итгэх итгэл улам батажна. Энэ онд гэрлэлтээ батлуулах, гал голомтоо асаах, үр хүүхэдтэй болох зэрэг амьдралын том шийдвэрүүд гаргахад хамгийн ивээлтэй жил байх болно. 2-ын эрчим нь арга билгийн нэгдэл, эв найрамдлыг бэлгэддэг тул чиний амьдралд урт удаан хугацааны аз жаргалын суурь тавигдах онцгой үе ирнэ дээ.`,
+2026 оны төөрөг
+Чиний 2026 оны хувийн жилийн төөргийг буулгавал 9-ийн тооны мөчлөгт шилжиж байна. Энэ нь чиний хайр сэтгэлийн амьдралд "Их ариусгал" хийгдэх онцгой жил байх нь ээ. Мандалд чинь 9-ийн тоо дутуу байгаагаас чи өнгөрсөн гомдлыг тээж явдаг бол, энэ онд тэр бүх сүүдрээс салж, дотоод сэтгэлээ ариусгах болно. Чамд тус болохоо больсон хуучин харилцаа, муу дадал зуршил энэ жил дуусгавар болно. Үүнийг хагацал гэж битгий гунь, харин шинэ замд бэлтгэж буй тэнгэрийн цэвэрлэгээ гэж ухаараарай.
+
+2027 оны төөрөг
+Дараагийн жил буюу 2027 онд чи 1-ийн тооны мөчлөгт орно. Энэ бол амьдралын шинэ хуудас, шинэ эхлэл юм. Өнгөрсөн оны ариусгалын дараа чи цоо шинэ эрч хүчтэйгээр хайр дурлалын замд алхах болно. Чиний амьдралын зам 1 учраас энэ жилийн эрчим чамтай маш сайн нийцэж, хүссэн харилцаагаа бүтээхэд чинь дэм өгнө. Энэ онд чи заяаны ханьтайгаа дахин учрах, эсвэл шинээр холбоо тогтоож харилцаагаа улам бат бэх болгох сайхан боломж хүлээж байна.
+
+2028 оны төөрөг
+2028 он бол чиний хувьд 2-ын тооны мөчлөг буюу "Харилцан ойлголцол, нэгдэл"-ийн жил байх болно. Өмнөх онд эхлүүлсэн харилцаа чинь энэ жил илүү гүнзгийрч, бие биедээ итгэх итгэл улам батажна. Энэ онд гал голомтоо асаах, үр хүүхэдтэй болох зэрэг амьдралын том шийдвэрүүд гаргахад хамгийн ивээлтэй жил байх болно. 2-ын эрчим нь арга билгийн нэгдэл, эв найрамдлыг бэлгэддэг тул чиний амьдралд урт удаан хугацааны аз жаргалын суурь тавигдах онцгой үе ирнэ дээ.`,
 
     PART_5: `V ХЭСЭГ ЗАЯАГ ТЭГШЛЭХ НУУЦ ТҮЛХҮҮР
-Ухаарал: Дэнсийг тааруулах
-Амьдралын зам чинь 1, мөн мандалд чинь гурван 1-ийн тоо байгаа нь чамайг биеэ даасан, бардам, хүчирхэг нэгэн болохыг илтгэж байна. Энэ хүч чамд амьдралд олон амжилтыг авчрах ч, хайр дурлалд заримдаа хатуудаж магадгүй. Хайр сэтгэлээ гэрэлтүүлье гэвэл "хамтын ойлголцол"-д суралцах хэрэгтэй. Бүхнийг өөрийнхөөрөө шийдэж, зааварлах хандлагаа зөөлрүүлж, ханийнхаа үгийг сонсож, амьдралын ачааг хуваалцаж сурах нь чиний хайр дурлалын замыг тэгшлэх гол түлхүүр юм. Энэ нь чиний дутуу байгаа 3 болон 4-ийн тоог нөхөж, гэр бүлд чинь амар амгаланг авчирна.
+Ухаарал ба Засал
+Амьдралын зам чинь 1, мөн мандалд чинь гурван 1-ийн тоо байгаа нь чамайг биеэ даасан, бардам, хүчирхэг нэгэн болохыг илтгэж байна. Энэ хүч чамд амьдралд олон амжилтыг авчрах ч, хайр дурлалд заримдаа хатуудаж магадгүй. Хайр сэтгэлээ гэрэлтүүлье гэвэл "хамтын ойлголцол"-д суралцах хэрэгтэй. Бүхнийг өөрийнхөөрөө шийдэж, зааварлах хандлагаа зөөлрүүлж, ханийнхаа үгийг сонсож, амьдралын ачааг хуваалцаж сурах нь чиний хайр дурлалын замыг тэгшлэх гол түлхүүр юм. Энэ л засал нь чиний дутуу байгаа 3 болон 4-ийн тоог нөхөж, гэр бүлд чинь амар амгаланг авчирна.
 
-Өглөөний шившлэг буюу Зүрхний тарни
-Дотор чинь хургасан "Би ганцаардах заяатай", "Намайг хэн ч ойлгохгүй" гэсэн муу бодлуудыг үргээхийн тулд өглөө бүр наранд цайгаа өргөж, өөртөө дараах үгсийг шившиж байгаарай:
-"Би өнгөрсөн бүх гомдлыг салхинд хийсгэж, шинэ хайр, гэрэл гэгээг хүлээж авахад бэлэн байна."
-"Би өөрийнхөө үнэ цэнийг мэднэ, би хайрлагдаж, жаргах эрхтэй хүн."
-"Би зүрхээ нээж, бусдыг ойлгож сонсоход бэлэн. Би заяаныхаа ханьд итгэлцэл, урт удаан жаргалыг бэлэглэнэ."
+Зүрхний тарни
+Дотор чинь хургасан эргэлзээ, ганцаардлыг үргээхийн тулд өглөө бүр наранд цайгаа өргөж, өөртөө дараах үгсийг шившиж байгаарай:
+"Хурмаст тэнгэрийн хүчийг биедээ шингээж, би өнгөрсөн бүх гомдлыг салхинд хийсгэж байна."
+"Алтан нарны туяагаар ариусаж, би жинхэнэ хайр, амгалан амьдралыг угтан авч байна."
+"Би зүрхээ нээж, бусдыг ойлгож сонсоход бэлэн. Би заяаныхаа ханьд итгэлцлийг бэлэглэнэ."
 
 Аз дуудах өнгө, чулуу
 Чиний хүчирхэг эрчмийг дэмжиж, хайр дурлалд ээлтэй байх өнгө бол "Алтлаг шар" болон "Улаан" өнгө юм. Алтлаг өнгө чиний сүлд хийморийг өргөх бол, Улаан өнгө нь хайр сэтгэлийн хүрдэнд гал бадрааж, халуун дулаан харилцааг дуудах болно. Харин сэтгэлийг чинь ариусгаж, заяаны ханийг татах байгалийн чулуу бол "Бадмаараг (Рубин)" юм. Бадмаараг нь хайр дурлал, эр зоригийн чулуу бөгөөд чиний зүрхний хүрдийг нээж, жинхэнэ хайртай учрахад тусална.
 
-Удган ээжийн эцсийн үг
-Үр минь, чи бол эгэл нэгэн биш ээ. Амьдралын 1-ийн замтай, өөрийн гэсэн бодолтой, тэнгэрлэг хүчирхэг нэгэн. Ганц бие яваа чинь чиний муугийнх биш, харин чиний сүнс энгийн нэгэн харилцааг бус, гүн гүнзгий, жинхэнэ сэтгэлийн холбоог хайж байгаагийн шинж юм. Одоо чи өөрийн хүчээ зөв залж, дутуугаа нөхөж чадвал тэнгэрээс чамд гайхалтай бэлэг бэлдсэн байгаа. 2026 онд хуучнаа ариусган цэвэрлэж, 2027 онд шинэ амьдралаа угтаж, 2028 онд харилцан ойлголцлын бат бэх гэр бүлийг цогцлоохоор төөрөг чинь буужээ. Энэ хугацааг зөв ашиглаж, зүрхээ бэлдээрэй дээ, үр минь. Хурмаст тэнгэр чамайг ивээх болтугай.`
+Удганы эцсийн үг
+Чиний заяа тавилан бол энгийн нэгэн хүнийхээс өөр, өөрийн гэсэн гүн утга учиртай, их багшийн зам мөр юм. Ганц бие байгаа чинь чиний буруу бус, харин жинхэнэ хайрыг угтах бэлтгэл цаг байжээ. Өнгөрснөө тавьж явуулан, бардам зангаа зөөллөж, өөрийн дотоод мөн чанараа таньсан цагт чамайг гайхалтай амьдрал хүлээж байна. Тэнгэрийн дор хувь заяа чиний гарт бий. Хурмаст тэнгэр чамайг ивээх болтугай.`
   }
 };
 
@@ -415,18 +421,22 @@ function generateSequentialReport(data, apiKey) {
 `;
 
   const SYSTEM_PROMPT = `
-  ROLE: You are a 50-year-old highly intuitive, wise Mongolian Shaman woman (Удган ээж) who specializes in destiny, karma, and love numerology. Tone: Mystical, Grounded, Motherly, and Wise. You address the user as "Үр минь" (my child) and use ancient Mongolian phrasing (e.g., заяа тавилан, төөрөг, хүрд, мандал, үйл). You act as a spiritual guide reading their destiny.
+  ROLE: You are a highly intuitive, wise Mongolian Shaman (Удган) who specializes in destiny, karma, and love numerology. Tone: Mystical, Grounded, and Wise. You act as a spiritual guide reading their destiny, using ancient Mongolian phrasing (e.g., заяа тавилан, төөрөг, хүрд, мандал, үйл).
   LANGUAGE: Proper Mongolian Cyrillic ONLY. STRICTLY NO KOREAN OR ENGLISH WORDS (Translate "vibration/frequency" to "эрчим/мандал").
 
   >>> MASTER RULES (STRICTLY ENFORCED): <<<
   1. ZERO META-TALK: NEVER use phrases like "Энэ хэсэгт бид...", "Дүгнэж хэлэхэд...", "Энэ хэсэг нь...", "Таны тайлан". Start your spiritual reading IMMEDIATELY in the very first sentence.
-  2. MYSTICAL YET GROUNDED: Do NOT write like a meaningless fairy tale, but rather a deep spiritual and psychological reading. Use words related to numerology but in a shamanic context (e.g., "тооны мандал", "заяаны хүрд").
-  3. STRICT FORMATTING & SUBTITLES:
-     - Every logical section MUST have a subtitle on its own line (e.g., "Заяагдсан араншин", "Кармын өр", "Сүнсний зохицол").
+  2. PERSONA LIMITS: DO NOT use the phrases "Удган ээж нь" or "Ээж нь" AT ALL. You may use "Үр минь" extremely sparingly (max 1 or 2 times in the entire output), but prefer addressing them directly or neutrally.
+  3. STRICT MONGOLIAN APPEARANCE: When describing a person, NEVER use foreign features (e.g., blue eyes, green eyes, yellow hair). ALWAYS describe them with Mongolian features (dark/brown eyes, dark hair, mongolian physique).
+  4. OPPOSITE GENDER: If the user is MALE (Эрэгтэй), describe their future partner as FEMALE (Эмэгтэй, бүсгүй). If the user is FEMALE (Эмэгтэй), describe their future partner as MALE (Эрэгтэй, залуу).
+  5. NO MODERN JOBS: NEVER use modern terms like IT, engineer, manager, yoga, psychologist, accountant. Use traditional concepts like "гарын уртай, тооцоо данс барьдаг, хүн анагаах үйлстэй, төрийн албатай, эрдэм номын хүн".
+  6. NO REPETITION: Each section must provide unique information. Do not repeat the same psychological advice over and over.
+  7. STRICT FORMATTING & SUBTITLES:
+     - Every logical section MUST have a subtitle on its own line exactly as instructed.
      - Do NOT use Markdown headers like (#, ##) or bold formatting (**text**) for subtitles. Just plain text.
      - NO bullet points or asterisks (*, -).
-  4. STRICT EMOJI RULE: The paragraph immediately following a subtitle MUST start with EXACTLY ONE emoji. ZERO exceptions. Do NOT use emojis on the subtitle line itself, and do NOT use them in the middle or end of sentences.
-  5. COMPLETENESS: NEVER cut off mid-sentence. Always finish your thoughts and provide a complete, well-rounded conclusion.
+  8. STRICT EMOJI RULE: The paragraph immediately following a subtitle MUST start with EXACTLY ONE emoji. ZERO exceptions. Do NOT use emojis on the subtitle line itself, and do NOT use them in the middle or end of sentences.
+  9. COMPLETENESS: NEVER cut off mid-sentence. Always finish your thoughts and provide a complete, well-rounded conclusion.
   `;
 
   // 1st CALL: Part 1 - DNA & Archetype
@@ -443,7 +453,7 @@ function generateSequentialReport(data, apiKey) {
   INSTRUCTIONS: Begin exactly with "I ХЭСЭГ ЗҮРХНИЙ ХҮРДИЙН ТӨӨРӨГ" on its own line, then double line break.
   Write 3 distinct sections. For each section, provide the SUBTITLE on its own line, followed by a double line break, followed by the content paragraph starting with an emoji.
   Section 1 Subtitle: "Заяагдсан араншин" - Analyze their Life Path number and what archetype they are in love, using shamanic phrasing.
-  Section 2 Subtitle: "Матрицын тоон өгөгдөл ба тайлал" - Analyze their matrix frequencies (especially repeating numbers like 1s, 2s or 8s) and what power/shadow traits it gives them.
+  Section 2 Subtitle: "Сүнсний өгөгдөл" - Analyze their matrix frequencies (especially repeating numbers like 1s, 2s or 8s) and what power/shadow traits it gives them.
   Section 3 Subtitle: "Хайрын хэлний учир" - Analyze their day number (${data.dayNumber}) to define their primary love language and how they need to be loved.
 
   STYLE GUIDE REFERENCE (Model your structure, depth, and tone exactly after this):
@@ -462,12 +472,12 @@ function generateSequentialReport(data, apiKey) {
   - Амьдралын зам: ${data.lifePath}
   - Хүйс: ${data.gender}
 
-  INSTRUCTIONS: Begin exactly with "II ХЭСЭГ ҮЙЛИЙН ҮР БА СЭРЭМЖЛҮҮЛЭГ" on its own line, then double line break.
+  INSTRUCTIONS: Begin exactly with "II ХЭСЭГ ҮЙЛИЙН ҮР БА ГАЦАА" on its own line, then double line break.
   Write 4 distinct sections with subtitles on their own lines, followed by content paragraphs starting with an emoji.
   Section 1 Subtitle: "Кармын өр" - Explain if they have karmic debt affecting love, or if they are a "clean slate" and it's just their choices.
-  Section 2 Subtitle: "Цоорхой тоо буюу гацаа" - Explain what the missing numbers (${data.missing.join(', ')}) mean in relationships (e.g. missing 4=instability, missing 6=self-worth issues, missing 9=holding onto past).
-  Section 3 Subtitle: "Сэтгэлийн гацаа" - Combine their Life Path and missing numbers to identify their deepest psychological block.
-  Section 4 Subtitle: "Эрчмийн харшил ба аюулын дохио" - Warn them about the types of people/energies they should avoid, based on their chart.
+  Section 2 Subtitle: "Төөргийн гацаа" - Explain what the missing numbers (${data.missing.join(', ')}) mean in relationships. Explain exactly where their relationships usually break down.
+  Section 3 Subtitle: "Эрчмийн харшил" - Warn them about the specific types of people/energies they should completely avoid, based on their chart.
+  Section 4 Subtitle: "Аз уу, сорилт уу?" - Conclude whether their current single status is actually a blessing in disguise to find themselves or a karmic challenge they need to overcome.
 
   STYLE GUIDE REFERENCE (Model your structure, depth, and tone exactly after this):
   ${CONFIG.REFERENCES.PART_2}
@@ -482,14 +492,14 @@ function generateSequentialReport(data, apiKey) {
   DATA:
   - Амьдралын зам: ${data.lifePath}
   - Матрицын цоорхой (Missing numbers that need filling): ${data.missing.join(', ') || 'Байхгүй'}
-  - Хүйс: ${data.gender}
+  - Хүйс: ${data.gender} (IMPORTANT: If the user is ${data.gender}, describe the OPPOSITE gender for their partner).
 
   INSTRUCTIONS: Begin exactly with "III ХЭСЭГ ЗАЯАНЫ ХАНИЙН ДҮР" on its own line, then double line break.
   Write 4 distinct sections with subtitles on their own lines, followed by content paragraphs starting with an emoji.
-  Section 1 Subtitle: "Сүнсний зохицол" - Describe the personality that complements them.
-  Section 2 Subtitle: "Ажил үйлс ба нэр хүнд" - Suggest potential career fields or social roles for this partner.
-  Section 3 Subtitle: "Ивээл өдрүүд буюу Алтан тоо" - What birth dates/numbers would mathematically balance this user?
-  Section 4 Subtitle: "Гадаад төрхийн шинж" - A psychological projection of their aura and physical presence.
+  Section 1 Subtitle: "Сүнсний зохицол ба Зан чанар" - Describe the inner world, personality, and soul connection of the partner. Ensure gender is opposite of the user.
+  Section 2 Subtitle: "Гадаад төрхийн шинж" - A psychological projection of their aura and physical presence. MUST be strict Mongolian features (dark eyes, dark hair). No western features.
+  Section 3 Subtitle: "Эд хөрөнгө ба Ажил үйлс" - Are they wealthy, poor, or will they build wealth together? Use traditional Mongolian job descriptions (e.g. гарын уртай, төрийн алба, анагаагч, тооцоо данс). NO MODERN JOBS.
+  Section 4 Subtitle: "Насны эрчим ба Алтан тоо" - Will the partner be older, younger, or the same age? What birth dates (numbers) will mathematically balance the user?
 
   STYLE GUIDE REFERENCE (Model your structure, depth, and tone exactly after this):
   ${CONFIG.REFERENCES.PART_3}
@@ -507,12 +517,12 @@ function generateSequentialReport(data, apiKey) {
   - ${data.personalYears[1].year} он: Хувийн жил ${data.personalYears[1].py}
   - ${data.personalYears[2].year} он: Хувийн жил ${data.personalYears[2].py}
 
-  INSTRUCTIONS: Begin exactly with "IV ХЭСЭГ ХУВЬ ЗАЯАНЫ 3 ЖИЛИЙН ЗУРАГЛАЛ" on its own line, then double line break.
+  INSTRUCTIONS: Begin exactly with "IV ХЭСЭГ УЧРАЛЫН ЦАГ ХУГАЦАА" on its own line, then double line break.
   Write 4 distinct sections with subtitles on their own lines, followed by content paragraphs starting with an emoji.
-  Section 1 Subtitle: "${data.personalYears[0].year} он: [insert PY meaning]" - Analyze this personal year for love.
-  Section 2 Subtitle: "${data.personalYears[1].year} он: [insert PY meaning]" - Analyze this personal year for love.
-  Section 3 Subtitle: "${data.personalYears[2].year} он: [insert PY meaning]" - Analyze this personal year for love.
-  Section 4 Subtitle: "Учрах магадлалтай газрууд" - Based on their missing numbers and exactly their Life Path ${data.lifePath}, where should they hang out to meet their avatar?
+  Section 1 Subtitle: "Хэдийнээ учирсан уу?" - Based on their energy, have they already met this person in the past, or is it someone completely new coming? Give a mystical prediction.
+  Section 2 Subtitle: "${data.personalYears[0].year} оны төөрөг" - Analyze this personal year for love.
+  Section 3 Subtitle: "${data.personalYears[1].year} оны төөрөг" - Analyze this personal year for love.
+  Section 4 Subtitle: "${data.personalYears[2].year} оны төөрөг" - Analyze this personal year for love.
   (Note: PY 1=New Beginnings, 2=Partnership, 3=Social/Fun, 4=Stability/Building, 5=Change/Freedom, 6=Family/Love, 7=Spiritual/Inner, 8=Power/Karma, 9=Endings/Clearing).
 
   STYLE GUIDE REFERENCE (Model your structure, depth, and tone exactly after this):
@@ -531,10 +541,10 @@ function generateSequentialReport(data, apiKey) {
 
   INSTRUCTIONS: Begin exactly with "V ХЭСЭГ ЗАЯАГ ТЭГШЛЭХ НУУЦ ТҮЛХҮҮР" on its own line, then double line break.
   Write 4 distinct sections with subtitles on their own lines, followed by content paragraphs starting with an emoji.
-  Section 1 Subtitle: "Ухаарал: Дэнсийг тааруулах" - Give them a practical psychological strategy to overcome their main flaw.
-  Section 2 Subtitle: "Өглөөний шившлэг буюу Зүрхний тарни" - Provide 3 powerful, specific affirmations tailored to heal their blockages. For the affirmations themselves, include them inside the paragraph naturally, separating them with commas or semicolons, rather than placing them on new lines.
+  Section 1 Subtitle: "Ухаарал ба Засал" - Give them a practical psychological strategy (zaasal) to overcome their main flaw.
+  Section 2 Subtitle: "Зүрхний тарни" - Provide 3 powerful, specific affirmations tailored to heal their blockages. For the affirmations themselves, include them inside the paragraph naturally, separating them with commas or semicolons, rather than placing them on new lines. Use natural, nature-based language.
   Section 3 Subtitle: "Аз дуудах өнгө, чулуу" - Recommend a specific color and crystal based on their energy needs.
-  Section 4 Subtitle: "Удган ээжийн эцсийн үг" - A powerful, grounding closing statement. Remind them their fate is in their hands.
+  Section 4 Subtitle: "Удганы эцсийн үг" - A powerful, grounding closing statement. Remind them their fate is in their hands. DO NOT USE "Үр минь".
 
   STYLE GUIDE REFERENCE (Model your structure, depth, and tone exactly after this):
   ${CONFIG.REFERENCES.PART_5}
