@@ -426,8 +426,9 @@ function generateSequentialReport(data, apiKey) {
   5. NO MODERN WORDS OR JOBS: NEVER use modern terms like IT, engineer, manager, yoga, psychologist, accountant, or western crystals like "lapis lazuli/amethyst". Use traditional concepts like "гарын уртай, тооцоо данс барьдаг, хүн анагаах үйлстэй, төрийн албатай" and traditional Mongolian crystals (e.g., мана, гартаам, оюу, номин, бадмаараг, чүнчигноров).
   6. NO REPETITION: Each section must provide unique information. Do not repeat the same psychological advice over and over.
   7. STRICT FORMATTING & SUBTITLES:
-     - DO NOT invent or duplicate section headers.
+     - DO NOT invent or duplicate section headers. NEVER write a section from a future part (e.g., if you are writing Part 1, NEVER write Part 2 subtitles).
      - Write EXACTLY the Numbered Main Header first, then the EXACT Subtitles given in the prompt.
+     - Stop writing completely after finishing your assigned sections. Do NOT append rogue paragraphs at the end.
      - Do NOT use Markdown headers like (#, ##) or bold formatting (**text**) for subtitles. Just plain text.
      - NO bullet points or asterisks (*, -).
   8. STRICT EMOJI RULE: The paragraph immediately following a subtitle MUST start with EXACTLY ONE emoji. ZERO exceptions. Do NOT use emojis on the subtitle line itself, and do NOT use them in the middle or end of sentences.
@@ -437,7 +438,7 @@ function generateSequentialReport(data, apiKey) {
   // 1st CALL: Part 1 - DNA & Archetype
   const prompt1 = `
   ${SYSTEM_PROMPT}
-  TASK: Write PART 1 ONLY (Love DNA - Shaman version).
+  TASK: Write PART 1 ONLY (Love DNA - Shaman version). DO NOT proceed to Part 2.
 
   DATA:
   - Амьдралын замын тоо (Life Path): ${data.lifePath}
@@ -445,8 +446,8 @@ function generateSequentialReport(data, apiKey) {
   - Төрсөн өдрийн тоо (Love Language): ${data.dayNumber}
   - Хүйс: ${data.gender}
 
-  INSTRUCTIONS: Begin exactly with "I ХЭСЭГ ЗҮРХНИЙ ХҮРДИЙН ТӨӨРӨГ" on its own line, then double line break.
-  Write 3 distinct sections. For each section, provide the SUBTITLE on its own line, followed by a double line break, followed by the content paragraph starting with an emoji.
+  INSTRUCTIONS: First line MUST be exactly: "I ХЭСЭГ ЗҮРХНИЙ ХҮРДИЙН ТӨӨРӨГ". Then double line break.
+  Write EXACTLY 3 sections. For each section, provide the SUBTITLE on its own line, followed by a double line break, followed by the content paragraph starting with an emoji.
   Section 1 Subtitle: "Заяагдсан араншин" - Analyze their Life Path number and what archetype they are in love, using shamanic phrasing.
   Section 2 Subtitle: "Сүнсний өгөгдөл" - Analyze their matrix frequencies (especially repeating numbers like 1s, 2s or 8s) and what power/shadow traits it gives them.
   Section 3 Subtitle: "Хайрын хэлний учир" - Analyze their day number (${data.dayNumber}) to define their primary love language and how they need to be loved.
@@ -459,7 +460,7 @@ function generateSequentialReport(data, apiKey) {
   // 2nd CALL: Part 2 - Why Single & Red Flags
   const prompt2 = `
   ${SYSTEM_PROMPT}
-  TASK: Write PART 2 ONLY (Why single & Red Flags - Shaman version).
+  TASK: Write PART 2 ONLY (Why single & Red Flags - Shaman version). DO NOT proceed to Part 3.
 
   DATA:
   - Кармын өр (Karmic Debt): ${data.karmicDebt.length > 0 ? data.karmicDebt.join(', ') : 'Байхгүй (Цагаан цаас)'}
@@ -467,8 +468,8 @@ function generateSequentialReport(data, apiKey) {
   - Амьдралын зам: ${data.lifePath}
   - Хүйс: ${data.gender}
 
-  INSTRUCTIONS: Begin exactly with "II ХЭСЭГ ҮЙЛИЙН ҮР БА ГАЦАА" on its own line, then double line break.
-  Write 4 distinct sections with subtitles on their own lines, followed by content paragraphs starting with an emoji.
+  INSTRUCTIONS: First line MUST be exactly: "II ХЭСЭГ ҮЙЛИЙН ҮР БА ГАЦАА". Then double line break.
+  Write EXACTLY 4 sections with subtitles on their own lines, followed by content paragraphs starting with an emoji.
   Section 1 Subtitle: "Кармын өр" - Explain if they have karmic debt affecting love, or if they are a "clean slate" and it's just their choices.
   Section 2 Subtitle: "Төөргийн гацаа" - Explain what the missing numbers (${data.missing.join(', ')}) mean in relationships. Explain exactly where their relationships usually break down.
   Section 3 Subtitle: "Эрчмийн харшил" - Warn them about the specific types of people/energies they should completely avoid, based on their chart.
@@ -482,19 +483,19 @@ function generateSequentialReport(data, apiKey) {
   // 3rd CALL: Part 3 - Partner Avatar
   const prompt3 = `
   ${SYSTEM_PROMPT}
-  TASK: Write PART 3 ONLY (Future Partner Avatar - Shaman version).
+  TASK: Write PART 3 ONLY (Future Partner Avatar - Shaman version). DO NOT proceed to Part 4. DO NOT write about specific years (e.g. 2026, 2027).
 
   DATA:
   - Амьдралын зам: ${data.lifePath}
   - Матрицын цоорхой (Missing numbers that need filling): ${data.missing.join(', ') || 'Байхгүй'}
   - Хүйс: ${data.gender} (IMPORTANT: If the user is ${data.gender}, describe the OPPOSITE gender for their partner).
 
-  INSTRUCTIONS: Begin exactly with "III ХЭСЭГ ЗАЯАНЫ ХАНИЙН ДҮР" on its own line, then double line break.
-  Write 4 distinct sections with subtitles on their own lines, followed by content paragraphs starting with an emoji.
+  INSTRUCTIONS: First line MUST be exactly: "III ХЭСЭГ ЗАЯАНЫ ХАНИЙН ДҮР". Then double line break.
+  Write EXACTLY 4 sections with subtitles on their own lines, followed by content paragraphs starting with an emoji. Stop generating immediately after Section 4.
   Section 1 Subtitle: "Сүнсний зохицол ба Зан чанар" - Describe the inner world, personality, and soul connection of the partner. Ensure gender is opposite of the user.
   Section 2 Subtitle: "Гадаад төрхийн шинж" - A psychological projection of their aura and physical presence. MUST be strict Mongolian features (dark eyes, dark hair). No western features.
   Section 3 Subtitle: "Эд хөрөнгө ба Ажил үйлс" - Are they wealthy, poor, or will they build wealth together? Use traditional Mongolian job descriptions (e.g. гарын уртай, төрийн алба, анагаагч, тооцоо данс). NO MODERN JOBS.
-  Section 4 Subtitle: "Насны эрчим ба Алтан тоо" - Will the partner be older, younger, or the same age? What birth dates (numbers) will mathematically balance the user?
+  Section 4 Subtitle: "Насны эрчим ба Алтан тоо" - Will the partner be older, younger, or the same age? What birth dates (numbers) will mathematically balance the user? DO NOT MENTION "IV ХЭСЭГ" HERE.
 
   STYLE GUIDE REFERENCE (Model your structure, depth, and tone exactly after this):
   ${CONFIG.REFERENCES.PART_3}
