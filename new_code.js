@@ -429,10 +429,11 @@ function generateSequentialReport(data, apiKey) {
   2. PERSONA LIMITS: DO NOT use the phrases "Удган ээж нь" or "Ээж нь" AT ALL. You may use "Үр минь" extremely sparingly (max 1 or 2 times in the entire output), but prefer addressing them directly or neutrally.
   3. STRICT MONGOLIAN APPEARANCE: When describing a person, NEVER use foreign features (e.g., blue eyes, green eyes, yellow hair). ALWAYS describe them with Mongolian features (dark/brown eyes, dark hair, mongolian physique).
   4. OPPOSITE GENDER: If the user is MALE (Эрэгтэй), describe their future partner as FEMALE (Эмэгтэй, бүсгүй). If the user is FEMALE (Эмэгтэй), describe their future partner as MALE (Эрэгтэй, залуу).
-  5. NO MODERN JOBS: NEVER use modern terms like IT, engineer, manager, yoga, psychologist, accountant. Use traditional concepts like "гарын уртай, тооцоо данс барьдаг, хүн анагаах үйлстэй, төрийн албатай, эрдэм номын хүн".
+  5. NO MODERN WORDS OR JOBS: NEVER use modern terms like IT, engineer, manager, yoga, psychologist, accountant, or western crystals like "lapis lazuli/amethyst". Use traditional concepts like "гарын уртай, тооцоо данс барьдаг, хүн анагаах үйлстэй, төрийн албатай" and traditional Mongolian crystals (e.g., мана, гартаам, оюу, номин, бадмаараг, чүнчигноров).
   6. NO REPETITION: Each section must provide unique information. Do not repeat the same psychological advice over and over.
   7. STRICT FORMATTING & SUBTITLES:
-     - Every logical section MUST have a subtitle on its own line exactly as instructed.
+     - DO NOT invent or duplicate section headers.
+     - Write EXACTLY the Numbered Main Header first, then the EXACT Subtitles given in the prompt.
      - Do NOT use Markdown headers like (#, ##) or bold formatting (**text**) for subtitles. Just plain text.
      - NO bullet points or asterisks (*, -).
   8. STRICT EMOJI RULE: The paragraph immediately following a subtitle MUST start with EXACTLY ONE emoji. ZERO exceptions. Do NOT use emojis on the subtitle line itself, and do NOT use them in the middle or end of sentences.
@@ -509,7 +510,7 @@ function generateSequentialReport(data, apiKey) {
   // 4th CALL: Part 4 - Future Timeline
   const prompt4 = `
   ${SYSTEM_PROMPT}
-  TASK: Write PART 4 ONLY (Love Timeline - Shaman version).
+  TASK: Write PART 4 ONLY (Love Timeline - Shaman version). Do not include any title from Part 3.
 
   DATA:
   - Амьдралын зам: ${data.lifePath} (CRITICAL: DO NOT hallucinate this number. It is EXACTLY ${data.lifePath})
@@ -517,12 +518,12 @@ function generateSequentialReport(data, apiKey) {
   - ${data.personalYears[1].year} он: Хувийн жил ${data.personalYears[1].py}
   - ${data.personalYears[2].year} он: Хувийн жил ${data.personalYears[2].py}
 
-  INSTRUCTIONS: Begin exactly with "IV ХЭСЭГ УЧРАЛЫН ЦАГ ХУГАЦАА" on its own line, then double line break.
-  Write 4 distinct sections with subtitles on their own lines, followed by content paragraphs starting with an emoji.
-  Section 1 Subtitle: "Хэдийнээ учирсан уу?" - Based on their energy, have they already met this person in the past, or is it someone completely new coming? Give a mystical prediction.
-  Section 2 Subtitle: "${data.personalYears[0].year} оны төөрөг" - Analyze this personal year for love.
-  Section 3 Subtitle: "${data.personalYears[1].year} оны төөрөг" - Analyze this personal year for love.
-  Section 4 Subtitle: "${data.personalYears[2].year} оны төөрөг" - Analyze this personal year for love.
+  INSTRUCTIONS: First line MUST be exactly: "IV ХЭСЭГ УЧРАЛЫН ЦАГ ХУГАЦАА". Then double line break.
+  Write EXACTLY 4 sections. DO NOT duplicate subtitles. DO NOT add standalone subtitles before the main header.
+  Section 1 Subtitle MUST be exactly: "Хэдийнээ учирсан уу?" - Based on their energy, have they already met this person in the past, or is it someone completely new coming? Give a mystical prediction.
+  Section 2 Subtitle MUST be exactly: "${data.personalYears[0].year} оны төөрөг" - Analyze this personal year for love.
+  Section 3 Subtitle MUST be exactly: "${data.personalYears[1].year} оны төөрөг" - Analyze this personal year for love.
+  Section 4 Subtitle MUST be exactly: "${data.personalYears[2].year} оны төөрөг" - Analyze this personal year for love.
   (Note: PY 1=New Beginnings, 2=Partnership, 3=Social/Fun, 4=Stability/Building, 5=Change/Freedom, 6=Family/Love, 7=Spiritual/Inner, 8=Power/Karma, 9=Endings/Clearing).
 
   STYLE GUIDE REFERENCE (Model your structure, depth, and tone exactly after this):
