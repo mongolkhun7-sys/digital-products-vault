@@ -423,12 +423,12 @@ function generateSequentialReport(data, apiKey) {
   2. PERSONA LIMITS: DO NOT use the phrases "Удган ээж нь" or "Ээж нь" AT ALL. You may use "Үр минь" extremely sparingly (max 1 or 2 times in the entire output), but prefer addressing them directly or neutrally.
   3. STRICT MONGOLIAN APPEARANCE: When describing a person, NEVER use foreign features (e.g., blue eyes, green eyes, yellow hair). ALWAYS describe them with Mongolian features (dark/brown eyes, dark hair, mongolian physique).
   4. OPPOSITE GENDER: If the user is MALE (Эрэгтэй), describe their future partner as FEMALE (Эмэгтэй, бүсгүй). If the user is FEMALE (Эмэгтэй), describe their future partner as MALE (Эрэгтэй, залуу).
-  5. NO MODERN WORDS OR JOBS: NEVER use modern terms like IT, engineer, manager, yoga, psychologist, accountant, or western crystals like "lapis lazuli/amethyst". Use traditional concepts like "гарын уртай, тооцоо данс барьдаг, хүн анагаах үйлстэй, төрийн албатай" and traditional Mongolian crystals (e.g., мана, гартаам, оюу, номин, бадмаараг, чүнчигноров).
+  5. NO MODERN WORDS OR JOBS: NEVER use modern terms like IT, engineer, manager, yoga, psychologist, accountant. STRICTLY BAN the words "Лапис Лазули", "Lapis Lazuli", "Аметист", "Amethyst" completely, even in brackets. Use traditional concepts like "гарын уртай, тооцоо данс барьдаг, хүн анагаах үйлстэй, төрийн албатай" and traditional Mongolian crystals only (e.g., мана, гартаам, оюу, номин, бадмаараг, чүнчигноров).
   6. NO REPETITION: Each section must provide unique information. Do not repeat the same psychological advice over and over.
   7. STRICT FORMATTING & SUBTITLES:
      - DO NOT invent or duplicate section headers. NEVER write a section from a future part (e.g., if you are writing Part 1, NEVER write Part 2 subtitles).
      - Write EXACTLY the Numbered Main Header first, then the EXACT Subtitles given in the prompt.
-     - Stop writing completely after finishing your assigned sections. Do NOT append rogue paragraphs at the end.
+     - Stop writing completely after finishing your assigned sections. Do NOT append rogue paragraphs or headers at the end.
      - Do NOT use Markdown headers like (#, ##) or bold formatting (**text**) for subtitles. Just plain text.
      - NO bullet points or asterisks (*, -).
   8. STRICT EMOJI RULE: The paragraph immediately following a subtitle MUST start with EXACTLY ONE emoji. ZERO exceptions. Do NOT use emojis on the subtitle line itself, and do NOT use them in the middle or end of sentences.
@@ -483,7 +483,7 @@ function generateSequentialReport(data, apiKey) {
   // 3rd CALL: Part 3 - Partner Avatar
   const prompt3 = `
   ${SYSTEM_PROMPT}
-  TASK: Write PART 3 ONLY (Future Partner Avatar - Shaman version). DO NOT proceed to Part 4. DO NOT write about specific years (e.g. 2026, 2027).
+  TASK: Write PART 3 ONLY (Future Partner Avatar - Shaman version). DO NOT write ANY information that belongs in Part 4. Do not talk about the future timeline or if they have met already. DO NOT write about specific years (e.g. 2026, 2027).
 
   DATA:
   - Амьдралын зам: ${data.lifePath}
@@ -491,11 +491,11 @@ function generateSequentialReport(data, apiKey) {
   - Хүйс: ${data.gender} (IMPORTANT: If the user is ${data.gender}, describe the OPPOSITE gender for their partner).
 
   INSTRUCTIONS: First line MUST be exactly: "III ХЭСЭГ ЗАЯАНЫ ХАНИЙН ДҮР". Then double line break.
-  Write EXACTLY 4 sections with subtitles on their own lines, followed by content paragraphs starting with an emoji. Stop generating immediately after Section 4.
+  Write EXACTLY 4 sections with subtitles on their own lines, followed by content paragraphs starting with an emoji. YOU MUST STOP COMPLETELY AFTER THE 4TH SECTION.
   Section 1 Subtitle: "Сүнсний зохицол ба Зан чанар" - Describe the inner world, personality, and soul connection of the partner. Ensure gender is opposite of the user.
   Section 2 Subtitle: "Гадаад төрхийн шинж" - A psychological projection of their aura and physical presence. MUST be strict Mongolian features (dark eyes, dark hair). No western features.
   Section 3 Subtitle: "Эд хөрөнгө ба Ажил үйлс" - Are they wealthy, poor, or will they build wealth together? Use traditional Mongolian job descriptions (e.g. гарын уртай, төрийн алба, анагаагч, тооцоо данс). NO MODERN JOBS.
-  Section 4 Subtitle: "Насны эрчим ба Алтан тоо" - Will the partner be older, younger, or the same age? What birth dates (numbers) will mathematically balance the user? DO NOT MENTION "IV ХЭСЭГ" HERE.
+  Section 4 Subtitle: "Насны эрчим ба Алтан тоо" - Will the partner be older, younger, or the same age? What birth dates (numbers) will mathematically balance the user? STRICT RULE: Do NOT add any extra paragraphs after this section. DO NOT mention "Хэдийнээ учирсан уу" or "IV ХЭСЭГ".
 
   STYLE GUIDE REFERENCE (Model your structure, depth, and tone exactly after this):
   ${CONFIG.REFERENCES.PART_3}
