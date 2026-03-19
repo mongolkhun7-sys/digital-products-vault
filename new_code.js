@@ -1,1 +1,738 @@
+// --- КОДЫН ЭХЛЭЛ ---
 
+/****************************************************************************************
+ * PRODUCT: SINGLES NUMEROLOGY & ASTROLOGY REPORT (LOVE DNA V1.0)
+ * ENGINE: ROBUST V26.1 (Smart Doc Insertion, Token Limit Safe, UChat, Regex Cleaner)
+ ****************************************************************************************/
+
+const CONFIG = {
+  VERSION: "v1.0-Singles-Love-DNA-Shaman",
+  PRODUCT_NAME: "Зүрхний Хүрдийн Үйлийн Үрийн Тайлал",
+  SHEET_NAME: "Sheet1",
+  BATCH_SIZE: 3,
+  GEMINI_MODEL: "gemini-2.5-flash",
+  TEMPERATURE: 0.3,
+
+  COLUMNS: {
+    NAME: 0, ID: 1, INPUT: 2, PDF: 3, STATUS: 4,
+    TOKEN: 5, DEBUG: 6, DATE: 7, VER: 8, ERROR: 9
+  },
+
+  UCHAT: {
+    ENDPOINT: "https://www.uchat.com.au/api/subscriber/send-content",
+    DELIVERY_MESSAGE: `Амар байна уу, {{NAME}}? 🔮\n\nТаны "Зүрхний хүрдийн үйлийн үрийн тайлал" бэлэн боллоо.\n\nДоорх судар дээр дарж, заяа тавилангийнхаа нууцыг олж уншаарай. 👇`,
+    DELIVERY_BTN_TEXT: "📜 Заяаны судар хүлээн авах"
+  },
+
+  // ==================================================================================
+  // 📜 FULL "GOLD STANDARD" REFERENCE TEXTS (STYLE GUIDE ONLY)
+  // ==================================================================================
+  REFERENCES: {
+    PART_1: `I ХЭСЭГ ЗҮРХНИЙ ХҮРДИЙН ТӨӨРӨГ
+Заяагдсан араншин
+Төрсөн өдрийн чинь мөрөөр хөөж үзвээс, амьдралын замын тоо чинь 1-ийн хүрдээр эргэлдэж байна. Энэ нь чамайг энэ насанд хайр сэтгэлийн мандал дор "Өөрийнхөөрөө зүтгэгч, тэргүүлэгч" гэсэн сүлдтэй бууж ирснийг илтгэж байна даа. Хайр дурлалын ертөнцөд чи өөрийнхөө бодол санааг өмнөө тавьж, амьдралын жолоог гартаа атгах заяатай төрсөн хүн юм. Хайр гэдэг чиний хувьд зүгээр л нэг сэтгэл хөдлөл биш, харин хамтдаа нэгэн зүгт тэмүүлэх бат бэх түшиг, нөхөрлөл билээ. Гэвч энэ хүчтэй араншингаас чинь болоод заримдаа ханийнхаа үгийг сонсохгүй дарах, өөрийнхөөрөө зүтгэх бардам зан гарч ирэх гээд байдаг гэмийг анзаарч, тэнцвэрийг нь тааруулж яваарай.
+
+Сүнсний өгөгдөл
+Пифагорын 9 нүдэн мандалд чиний тоонууд ингэж бууж байна даа: 1:3 | 2:2 | 3:0 | 4:0 | 5:1 | 6:0 | 7:0 | 8:2 | 9:0. Эдгээр тоонууд чиний сүнсний гүнд хэрхэн нөлөөлдгийг хэлээд өгье. Нэгдүгээрт, чиний мандалд нэгийн тоо гурвантаа давтагдсан нь чамд тэнгэрээс өгөгдсөн маш хүчтэй манлайлах эрч хүчийг хуримтлуулж байна. Энэ нь чамайг бусдын дор орох дургүй, бие даасан хүчирхэг нэгэн болгож байгаа хэрэг. Аливаад чи өөрийнхөө шийдвэрээр хандаж, түүндээ хүрэх гэж уйгагүй зүтгэдэг сайн талтай. Гэвч хайр дурлалын харилцаанд энэ их хүч чинь савнаасаа халивал, ханиа өөрийн эрхгүй дарамтлах, эсвэл дорой амьтныг голох сүүдэр дагуулдаг тул дотоод сэтгэлээ шинжиж, ханиа энэрэн хайрлах ухааныг сурах хэрэгтэй байна даа.
+
+Хайрын хэлний учир
+Чиний төрсөн өдөрт 3-ын тооны эрчим оршиж байгаа нь чиний зүрхний хэл бол "Сэтгэлийн үг, урам зориг" гэдгийг харуулж байна. Хайртай хүнтэйгээ чи сэтгэлээ онгойтол ярилцаж, ойлголцохыг туйлаас хүсдэг хүн юм. Үнэтэй ховор эд хөрөнгөнөөс илүүтэй, оройн намуунд чамтай хууч хөөрч, мөрөөдлийг чинь хуваалцаж, урам хайрладаг хүнд л чиний зүрх уяран хайлна. Хэрвээ ханилсан хүн чинь дуугай, дотогшоо эсвэл чиний үгийг эс тоовол чи тэр гэрт ганцаардаж, гомдож эхэлдэг учиртай. Тиймээс чиний зүрхний түлхүүр бол харилцан яриа бөгөөд чамайг чин сэтгэлээсээ сонсох тэр л хүн чиний заяаны хань мөнөөсөө мөн.`,
+
+    PART_2: `II ХЭСЭГ ҮЙЛИЙН ҮР БА ГАЦАА
+Кармын өр
+Төрсөн он сар өдрийг чинь судалж үзэхнээ 13, 14, 16, 19 гэсэн урьд насны хар нүгэл, үйлийн үрийн тоо алга байна. Үүнийг "Цагаан цаас шиг цэвэр үйлийн үр" гэж дууддаг юм. Энэ нь чи урьд насандаа хүний сэтгэл шархлуулж, өрх гэрийн үймээн тариагүй, буян хишигтэй явсныг илтгэж байна. Чамд ямар нэгэн удам дамжсан хараал, гэрлэлтийн бүтэлгүйтэл заяагдаагүй бөгөөд чиний өнөөдрийн ганц бие яваа чинь зөвхөн чиний өөрийн чинь л шийдвэр юм шүү дээ.
+
+Төөргийн гацаа
+Чиний мандалд 3, 4, 6, 7, 9-ийн тоонууд дутаж байна. Энэ нь чиний хайр дурлалын замд дараах бартаануудыг үүсгээд байна даа. Нэгдүгээрт, 3-ын тоо дутсанаас чи доторх үгээ хүнд хэлж чадахгүй, сэтгэлээ нээхдээ хойрго хандах гэмтэй. Хайрын хэл чинь яриа хөөрөө мөртлөө өөрөө эгзэгтэй үед дуугүй болчихдог нь ханиасаа хөндийрөх шалтгаан болдог. Хоёрдугаарт, 4-ийн тоо дутсан нь харилцаанд тогтвор суурьшил, хариуцлага дутаж мэдэх дохио өгч байна. Гуравдугаарт, 6-ийн тоо дутсан нь чи хайр сэтгэлд умбахдаа өөрийгөө умартаж, ханиасаа хэт хамааралтай болох, эсвэл өөрийгөө хайрлуулах эрхгүй хүн мэт дорд үзэх аюултайг анхааруулж байна.
+
+Эрчмийн харшил
+Амьдралын зам 1, мандалд нэгийн тоо гурвантаа орсон, дээр нь өдрийн 3-ын тоотой нийлээд чамд дараах төрлийн хүмүүс хамгийн их гай барцад авчирна гэдгийг сануулъя. Хамгийн түрүүнд, чамайг захирч, бүхнийг гартаа оруулах гэсэн дарангуйлагч хүнээс хол яв. Чи өөрөө маш хүчтэй заяатай ч, тийм хүнтэй учирвал өөрийн үнэ цэнээ алдаж, түүний аяст орж гээгдэх аюултай. "Минийхээр л бай" гэж тулгадаг хүмүүс чиний сүнсийг боомилж мэднэ. Энэ төрлийн хүмүүс ихэвчлэн сарын 8, 17, 26-ны өдөр төрсөн байх нь олонтаа тул тийм хүмүүстэй харилцахдаа сонор сэрэмжтэй байж, өөрийн орон зайгаа хамгаалж яваарай.
+
+Аз уу, сорилт уу?
+Ганц бие яваа энэ хугацааг чи шийтгэл гэж битгий бод. Үнэн хэрэгтээ чиний энэ зожиг, шаардлага өндөртэй байдал нь тэнгэрээс чамд өөрийгөө таньж, дотоод хүчээ олох гэж өгсөн том аз, завшаан юм. Чи хүн бүртэй таарах амархан сүнс биш учраас өөрийнхөө мөн чанарт нийцэх тэр л нэгнийг хүлээж байгаа нь чиний гүн гүнзгий дотоод мэдрэмжийн илрэл юм. Тиймээс энэ бол заяаны муу биш, харин жинхэнэ хайрыг угтах бэлтгэл цаг хугацаа билээ.`,
+
+    PART_3: `III ХЭСЭГ ЗАЯАНЫ ХАНИЙН ДҮР
+Сүнсний зохицол ба Зан чанар
+Төөргийг чинь уншиж байхад, чамд заяасан хань чинь чиний дотоод ертөнцийг зөөлрүүлж, дутууг чинь гүйцээх эмэгтэй хүн байх нь тодорхой байна. Чиний бардам, өөрийнхөөрөө байдлыг зөөллөх, тайван амгалан, халамжтай хүн л чиний заяаны хань юм. Тэр эмэгтэй чамайг сонсдог, дотоод хүчийг чинь хүндэлдэг хэрнээ чамайг тайвшруулж, өрх гэрт дулаан илч авчирна. Түүний дэргэд чи өөрийгөө таньж, өнгөрсөн гомдлоо арилгах болно доо.
+
+Гадаад төрхийн шинж
+Заяаны ханийн чинь царай төрх нь дотоод сүнснийх нь тусгал мэт дулаахан, дөлгөөн байх болно. Мэлмэрсэн хар эсвэл гүн бор нүдтэй, нүднийх нь гүнд нинжин сэтгэл гэрэлтсэн, харц нь тогтуун нэгэн байна. Бие галбир нь хэтэрхий туранхай эсвэл бадриун биш, монгол бүсгүйн унаган бие цогцостой, хөдөлгөөн нь төлөв даруу, алхаа нь аядуу зөөлөн байна. Инээмсэглэл нь өглөөний нар мэт гэрэлтсэн, үг хэллэг нь хүний сэтгэлд хүрдэг, цэвэр цэмцгэр байдлыг эрхэмлэдэг бүсгүй байх нь ээ. Түүний дэргэд байхад цаанаасаа л нэг нөмөртэй, амар амгалан мэдрэгдэх болно.
+
+Эд хөрөнгө ба Ажил үйлс
+Түүний хийх ажил үйлс нь эрх мэдэл хөөцөлдсөн биш, харин бусдын бие сэтгэлийг анагаагч, эсвэл гарын уртай, тооцоо данс барьдаг нягт хүн байх магадлалтай байна. Тэрээр хийж буй үйлээ зүгээр нэг мөнгөний төлөө бус, бусдад тус болох гэсэн цагаан сэтгэлээр хийдэг байх нь чухал. Эд хөрөнгийн хувьд цаанаасаа их баян тарган биш ч, амьдралын ухаантай, арвич хямгач зангийнхаа хүчээр өрх гэрээ дүүрэн авч явна. Та хоёр хамтдаа зүтгэж байж л амьдралын дэнсийг тэгш барьж, дутуугаа нөхөж, хөрөнгө зоорь хураах заяатай.
+
+Насны эрчим ба Алтан тоо
+Чиний заяатай хамгийн сайн нийцэх эмэгтэй нь чамаас хэд дүү, эсвэл чацуудуу насны хүн байх магадлал өндөр байна. Сарын 6, 15, 24-ний өдрүүдэд төрсөн хүмүүс нь машид ивээлтэй. Ялангуяа 6-гийн тоотой энэ хүмүүс чиний дутуу 6-гийн тоог гүйцээж, чамд халамж, хайр, гэр бүлийн халуун дулааныг бэлэглэх болно. Мөн сарын 2, 11, 20, 29-нд төрсөн хүмүүс нь чиний амьдралын замыг гэрэлтүүлэх хувьтай бөгөөд нэг нь удирдаж, нөгөөх нь уян хатан дагаж, амьдралыг тэгшитгэх болно.`,
+
+    PART_4: `IV ХЭСЭГ УЧРАЛЫН ЦАГ ХУГАЦАА
+Хэдийнээ учирсан уу?
+Өнгөрсөн он жилүүдийн эрчмийг уншиж байхад, чиний заяаны хань аль хэдийнэ чиний амьдралын тойрогт орж ирсэн, эсвэл өмнө нь таарч байсан хүн байх магадлал өндөр байна. Магадгүй тэр үед та хоёрын сүнсний цаг нь болоогүйгээс зөрөөд өнгөрсөн байж мэднэ. Эргэн тойрноо, хуучны танилуудаа сайн нэг анзаараад үзээрэй, заяаны утас нь хэдийнээ холбогдсон хэрнээ чи анзаараагүй яваа ч юм билүү.
+
+2026 оны төөрөг
+Чиний 2026 оны хувийн жилийн төөргийг буулгавал 9-ийн тооны мөчлөгт шилжиж байна. Энэ нь чиний хайр сэтгэлийн амьдралд "Их ариусгал" хийгдэх онцгой жил байх нь ээ. Мандалд чинь 9-ийн тоо дутуу байгаагаас чи өнгөрсөн гомдлыг тээж явдаг бол, энэ онд тэр бүх сүүдрээс салж, дотоод сэтгэлээ ариусгах болно. Чамд тус болохоо больсон хуучин харилцаа, муу дадал зуршил энэ жил дуусгавар болно. Үүнийг хагацал гэж битгий гунь, харин шинэ замд бэлтгэж буй тэнгэрийн цэвэрлэгээ гэж ухаараарай.
+
+2027 оны төөрөг
+Дараагийн жил буюу 2027 онд чи 1-ийн тооны мөчлөгт орно. Энэ бол амьдралын шинэ хуудас, шинэ эхлэл юм. Өнгөрсөн оны ариусгалын дараа чи цоо шинэ эрч хүчтэйгээр хайр дурлалын замд алхах болно. Чиний амьдралын зам 1 учраас энэ жилийн эрчим чамтай маш сайн нийцэж, хүссэн харилцаагаа бүтээхэд чинь дэм өгнө. Энэ онд чи заяаны ханьтайгаа дахин учрах, эсвэл шинээр холбоо тогтоож харилцаагаа улам бат бэх болгох сайхан боломж хүлээж байна.
+
+2028 оны төөрөг
+2028 он бол чиний хувьд 2-ын тооны мөчлөг буюу "Харилцан ойлголцол, нэгдэл"-ийн жил байх болно. Өмнөх онд эхлүүлсэн харилцаа чинь энэ жил илүү гүнзгийрч, бие биедээ итгэх итгэл улам батажна. Энэ онд гал голомтоо асаах, үр хүүхэдтэй болох зэрэг амьдралын том шийдвэрүүд гаргахад хамгийн ивээлтэй жил байх болно. 2-ын эрчим нь арга билгийн нэгдэл, эв найрамдлыг бэлгэддэг тул чиний амьдралд урт удаан хугацааны аз жаргалын суурь тавигдах онцгой үе ирнэ дээ.`,
+
+    PART_5: `V ХЭСЭГ ЗАЯАГ ТЭГШЛЭХ НУУЦ ТҮЛХҮҮР
+Ухаарал ба Засал
+Амьдралын зам чинь 1, мөн мандалд чинь гурван 1-ийн тоо байгаа нь чамайг биеэ даасан, бардам, хүчирхэг нэгэн болохыг илтгэж байна. Энэ хүч чамд амьдралд олон амжилтыг авчрах ч, хайр дурлалд заримдаа хатуудаж магадгүй. Хайр сэтгэлээ гэрэлтүүлье гэвэл "хамтын ойлголцол"-д суралцах хэрэгтэй. Бүхнийг өөрийнхөөрөө шийдэж, зааварлах хандлагаа зөөлрүүлж, ханийнхаа үгийг сонсож, амьдралын ачааг хуваалцаж сурах нь чиний хайр дурлалын замыг тэгшлэх гол түлхүүр юм. Энэ л засал нь чиний дутуу байгаа 3 болон 4-ийн тоог нөхөж, гэр бүлд чинь амар амгаланг авчирна.
+
+Зүрхний тарни
+Дотор чинь хургасан эргэлзээ, ганцаардлыг үргээхийн тулд өглөө бүр наранд цайгаа өргөж, өөртөө дараах үгсийг шившиж байгаарай:
+"Хурмаст тэнгэрийн хүчийг биедээ шингээж, би өнгөрсөн бүх гомдлыг салхинд хийсгэж байна."
+"Алтан нарны туяагаар ариусаж, би жинхэнэ хайр, амгалан амьдралыг угтан авч байна."
+"Би зүрхээ нээж, бусдыг ойлгож сонсоход бэлэн. Би заяаныхаа ханьд итгэлцлийг бэлэглэнэ."
+
+Аз дуудах өнгө, чулуу
+Чиний хүчирхэг эрчмийг дэмжиж, хайр дурлалд ээлтэй байх өнгө бол "Алтлаг шар" болон "Улаан" өнгө юм. Алтлаг өнгө чиний сүлд хийморийг өргөх бол, Улаан өнгө нь хайр сэтгэлийн хүрдэнд гал бадрааж, халуун дулаан харилцааг дуудах болно. Харин сэтгэлийг чинь ариусгаж, заяаны ханийг татах байгалийн чулуу бол "Бадмаараг (Рубин)" юм. Бадмаараг нь хайр дурлал, эр зоригийн чулуу бөгөөд чиний зүрхний хүрдийг нээж, жинхэнэ хайртай учрахад тусална.
+
+Удганы эцсийн үг
+Чиний заяа тавилан бол энгийн нэгэн хүнийхээс өөр, өөрийн гэсэн гүн утга учиртай, их багшийн зам мөр юм. Ганц бие байгаа чинь чиний буруу бус, харин жинхэнэ хайрыг угтах бэлтгэл цаг байжээ. Өнгөрснөө тавьж явуулан, бардам зангаа зөөллөж, өөрийн дотоод мөн чанараа таньсан цагт чамайг гайхалтай амьдрал хүлээж байна. Тэнгэрийн дор хувь заяа чиний гарт бий. Хурмаст тэнгэр чамайг ивээх болтугай.`
+  }
+};
+
+function getProperty(key) {
+  const val = PropertiesService.getScriptProperties().getProperty(key);
+  if (!val) throw new Error(`MISSING SCRIPT PROPERTY: ${key}`);
+  return val;
+}
+
+// ==========================================
+// 🚀 ROBUST MAIN ENGINE (AUTO-HEALING)
+// ==========================================
+function main() {
+  const START_TIME = new Date().getTime();
+  const TIME_LIMIT_MS = 5 * 60 * 1000; // 5.0 minutes
+
+  const lock = LockService.getScriptLock();
+  if (!lock.tryLock(10000)) return;
+
+  try {
+    const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(CONFIG.SHEET_NAME);
+    const rows = sheet.getDataRange().getValues();
+    let processedCount = 0;
+
+    const KEYS = {
+      GEMINI: getProperty("GEMINI_API_KEY"),
+      TEMPLATE: getProperty("TEMPLATE_ID"),
+      UCHAT: getProperty("UCHAT_API_KEY"),
+      FOLDER: getProperty("FOLDER_ID")
+    };
+
+    const COLS = CONFIG.COLUMNS;
+
+    for (let i = 1; i < rows.length; i++) {
+      if (processedCount >= CONFIG.BATCH_SIZE) break;
+
+      // Premium Upgrade 2: Time Limit Safeguard
+      if (new Date().getTime() - START_TIME > TIME_LIMIT_MS) {
+        console.warn("Time limit approaching. Stopping early to prevent Google Apps Script timeout.");
+        break;
+      }
+
+      const row = rows[i];
+      const name = String(row[COLS.NAME] || "Эрхэм");
+      const contactID = row[COLS.ID];
+      const inputData = String(row[COLS.INPUT]);
+      const status = String(row[COLS.STATUS] || "");
+      const rawDate = row[COLS.DATE];
+
+      const pdfCell = sheet.getRange(i + 1, COLS.PDF + 1);
+      const statusCell = sheet.getRange(i + 1, COLS.STATUS + 1);
+      const errorCell = sheet.getRange(i + 1, COLS.ERROR + 1);
+      const tokenCell = sheet.getRange(i + 1, COLS.TOKEN + 1);
+      const debugCell = sheet.getRange(i + 1, COLS.DEBUG + 1);
+      const dateCell = sheet.getRange(i + 1, COLS.DATE + 1);
+      const verCell = sheet.getRange(i + 1, COLS.VER + 1);
+
+      if (!inputData) continue;
+      if (status === "АМЖИЛТТАЙ" || status.includes("ХЯНАХ ШААРДЛАГАТАЙ") || status.includes("24 цаг хэтэрсэн")) continue;
+
+      let isRetry = false;
+      if (status === "Боловсруулж байна...") {
+        if (rawDate instanceof Date) {
+          const nowMs = new Date().getTime();
+          const startMs = rawDate.getTime();
+          const diffMinutes = (nowMs - startMs) / (1000 * 60);
+
+          if (diffMinutes > 15) {
+             isRetry = true;
+             console.log(`Timeout recovery for user. Stuck for ${Math.round(diffMinutes)} mins.`);
+          } else {
+             continue;
+          }
+        } else {
+           continue;
+        }
+      }
+
+      statusCell.setValue("Боловсруулж байна...");
+
+      const startTime = new Date();
+      dateCell.setValue(startTime); // MUST BE A DATE OBJECT FOR TIMEOUT RECOVERY
+      SpreadsheetApp.flush();
+
+      try {
+        console.log(`Processing Love DNA logic for user...`);
+
+        // 1. DATA PREP: AI PARSING
+        const normalized = normalizeInputWithAI(inputData, KEYS.GEMINI);
+
+        // 2. PARSE & CALCULATE (The Brain)
+        const userProfile = calculateNumerologyProfile(normalized);
+
+        // 3. GENERATE REPORT (The Voice) - Split Calls
+        const reportResult = generateSequentialReport(userProfile, KEYS.GEMINI);
+
+        // 4. SAFE PDF DELIVERY ENGINE
+        const pdfUrl = createPdfSafely(name, reportResult.text, KEYS.TEMPLATE, KEYS.FOLDER);
+
+        sendUChatProven(contactID, pdfUrl, name, KEYS.UCHAT);
+
+        const totalTokens = (normalized.usage || 0) + reportResult.usage;
+        const now = Utilities.formatDate(new Date(), Session.getScriptTimeZone(), "yyyy-MM-dd HH:mm");
+
+        pdfCell.setValue(pdfUrl);
+        statusCell.setValue("АМЖИЛТТАЙ");
+        tokenCell.setValue(totalTokens);
+        debugCell.setValue(JSON.stringify(userProfile));
+        dateCell.setValue(now);
+        verCell.setValue(CONFIG.VERSION);
+        errorCell.setValue("");
+
+        processedCount++;
+
+      } catch (err) {
+        let errorMsgStr = err.toString();
+        let mongolianError = "Системийн алдаа: " + errorMsgStr;
+
+        if (errorMsgStr.includes("24H_LIMIT") || errorMsgStr.includes("window")) {
+            mongolianError = "Фэйсбүүк 24 цаг хэтэрсэн тул мессеж явуулах эрх хаагдсан байна.";
+            statusCell.setValue("24 цаг хэтэрсэн");
+            errorCell.setValue(mongolianError);
+            continue;
+        } else if (errorMsgStr.includes("Gemini") || errorMsgStr.includes("JSON Parse")) {
+            mongolianError = "AI (Gemini) хариу өгсөнгүй эсвэл түр зуур хэт ачаалалтай байна.";
+        } else if (errorMsgStr.includes("UChat token") || errorMsgStr.includes("user_ns")) {
+            mongolianError = "UChat тохиргоо эсвэл харилцагчийн код буруу байна.";
+        } else if (errorMsgStr.includes("Drive")) {
+            mongolianError = "Google Drive лимит хэтэрсэн эсвэл ID буруу байна.";
+        }
+
+        console.error(`Error: ${errorMsgStr}`);
+        errorCell.setValue(mongolianError);
+
+        if (isRetry || status === "") {
+             statusCell.setValue("Дахин оролдож байна (1)");
+        } else if (status === "Дахин оролдож байна (1)") {
+             statusCell.setValue("Дахин оролдож байна (2)");
+        } else if (status === "Дахин оролдож байна (2)") {
+             statusCell.setValue("ХЯНАХ ШААРДЛАГАТАЙ");
+        } else {
+             statusCell.setValue("Дахин оролдож байна (1)");
+        }
+      }
+    }
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+// ==========================================
+// 2. CALCULATIONS ENGINE (Numerology: Life Path, Matrix, Karmic, Personal Year)
+// ==========================================
+
+function sumDigits(numStr) {
+  let sum = 0;
+  for (let char of numStr) {
+    if (char >= '0' && char <= '9') {
+      sum += parseInt(char, 10);
+    }
+  }
+  return sum;
+}
+
+function reduceToSingleDigit(num, keepMaster = false) {
+  let current = num;
+  while (current > 9) {
+    if (keepMaster && (current === 11 || current === 22 || current === 33)) {
+      return current;
+    }
+    current = sumDigits(current.toString());
+  }
+  return current;
+}
+
+function extractKarmicDebt(day, month, yearSum) {
+  const karmicNumbers = [13, 14, 16, 19];
+  let found = [];
+
+  if (karmicNumbers.includes(day)) found.push(day);
+
+  let daySum = reduceToSingleDigit(day);
+  let monthSum = reduceToSingleDigit(month);
+  let ySumReduced = reduceToSingleDigit(yearSum);
+  let totalRaw = daySum + monthSum + ySumReduced;
+
+  if (karmicNumbers.includes(totalRaw)) found.push(totalRaw);
+
+  return [...new Set(found)];
+}
+
+function calculatePythagoreanMatrix(dobStr) {
+  const parts = dobStr.split(/[.\-\/]/);
+  // dobStr is guaranteed to be YYYY.MM.DD at this point from normalization
+  const dayStr = parts[2] || "01";
+
+  const digits = dobStr.replace(/[^0-9]/g, '');
+  let d1 = sumDigits(digits);
+  let d2 = reduceToSingleDigit(d1);
+
+  let firstDigitOfDOB = parseInt(dayStr[0], 10);
+  if(firstDigitOfDOB === 0 && dayStr.length > 1) {
+    firstDigitOfDOB = parseInt(dayStr[1], 10);
+  }
+  let d3 = Math.abs(d1 - (2 * firstDigitOfDOB));
+  let d4 = reduceToSingleDigit(d3);
+
+  const allNumbers = digits + d1.toString() + d2.toString() + d3.toString() + d4.toString();
+
+  let matrix = {1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0};
+  for (let char of allNumbers) {
+    if (char >= '1' && char <= '9') {
+      matrix[parseInt(char, 10)]++;
+    }
+  }
+
+  let missing = [];
+  for (let i = 1; i <= 9; i++) {
+    if (matrix[i] === 0) missing.push(i);
+  }
+
+  return { matrix, missing, rawNumbers: allNumbers };
+}
+
+function getPersonalYear(day, month, targetYear) {
+  let d = reduceToSingleDigit(sumDigits(day.toString()));
+  let m = reduceToSingleDigit(sumDigits(month.toString()));
+  let y = reduceToSingleDigit(sumDigits(targetYear.toString()));
+  return reduceToSingleDigit(d + m + y);
+}
+
+function calculateNumerologyProfile(normalizedData) {
+  const { dob, userGender, name } = normalizedData;
+  const parts = dob.split(/[.\-\/]/).map(Number);
+  const year = parts[0];
+  const month = parts[1];
+  const day = parts[2];
+
+  // 1. Life Path Number
+  const daySum = reduceToSingleDigit(sumDigits(day.toString()), true);
+  const monthSum = reduceToSingleDigit(sumDigits(month.toString()), true);
+  const yearSum = reduceToSingleDigit(sumDigits(year.toString()), true);
+
+  const lifePathRaw = daySum + monthSum + yearSum;
+  const lifePath = reduceToSingleDigit(lifePathRaw, true);
+
+  // 2. Day Number (Love Language / Communication style)
+  const dayNumber = reduceToSingleDigit(day);
+
+  // 3. Karmic Debt
+  const karmicDebt = extractKarmicDebt(day, month, sumDigits(year.toString()));
+
+  // 4. Matrix & Missing numbers
+  const { matrix, missing } = calculatePythagoreanMatrix(dob);
+  const matrixStr = Object.keys(matrix).map(k => `${k}:${matrix[k]}`).join(" | ");
+
+  // 5. Personal Years (Next 3 years)
+  const currentYear = new Date().getFullYear();
+  const py1 = { year: currentYear, py: getPersonalYear(day, month, currentYear) };
+  const py2 = { year: currentYear + 1, py: getPersonalYear(day, month, currentYear + 1) };
+  const py3 = { year: currentYear + 2, py: getPersonalYear(day, month, currentYear + 2) };
+
+  return {
+    name, gender: userGender, dob, year, month, day,
+    lifePath, dayNumber, karmicDebt, matrix, matrixStr, missing,
+    personalYears: [py1, py2, py3]
+  };
+}
+
+function normalizeInputWithAI(raw, key) {
+  const prompt = `
+  TASK: Normalize this single person's data.
+  INPUT: "${raw}"
+
+  INSTRUCTIONS:
+  1. Extract Gender (M/F). Return "Эрэгтэй" or "Эмэгтэй". Default "Эмэгтэй" if unknown. Note: In Mongolian "эрэгтэй", "эр" means male, "эмэгтэй", "эм" means female.
+  2. Extract Date of Birth (YYYY.MM.DD). Look for formats like 19961030, 1996/10/30, 1996.10.30, 96.10.30.
+  3. Extract "Name" if present, else "Эрхэм".
+
+  RETURN JSON ONLY (No markdown formatting, just the raw JSON object):
+  {"userGender": "Эрэгтэй", "dob": "YYYY.MM.DD", "name": "Name"}
+  `;
+  try {
+    const result = callGeminiAPI(prompt, key, 0.1, true);
+    // Strip markdown if AI hallucinated it despite instructions
+    let jsonStr = result.text.trim();
+    if (jsonStr.startsWith("```json")) {
+        jsonStr = jsonStr.replace(/^```json\n/, "").replace(/\n```$/, "");
+    }
+    const data = JSON.parse(jsonStr);
+    if (!data.dob) throw new Error("No date");
+
+    let gender = "Эмэгтэй";
+    let rawG = (data.userGender || "").toLowerCase();
+    if (rawG.includes("эр") || rawG === "male" || rawG === "man" || raw.toLowerCase().includes("эр")) gender = "Эрэгтэй";
+
+    return { ...data, userGender: gender, usage: result.usage };
+  } catch (e) {
+    console.warn("AI Normalization failed, using regex fallback.", e.toString());
+    const dateMatch = raw.match(/\d{4}[\.\-\s\/]\d{1,2}[\.\-\s\/]\d{1,2}/);
+
+    if (!dateMatch) {
+       throw new Error("Төрсөн он сар өдөр олдсонгүй, эсвэл буруу форматтай байна. Гараар шалгана уу.");
+    }
+
+    let fallbackGender = "Эмэгтэй";
+    if (raw.toLowerCase().includes("эр")) fallbackGender = "Эрэгтэй";
+
+    return {
+      dob: dateMatch[0].replace(/[\s\-\/]/g, "."),
+      userGender: fallbackGender,
+      name: "Эрхэм",
+      usage: 0
+    };
+  }
+}
+
+// ==========================================
+// 3. AI GENERATION (TOKEN-SAFE LENGTH + STRICT FORMAT)
+// ==========================================
+function generateSequentialReport(data, apiKey) {
+
+  const SYSTEM_PROMPT = `
+  ROLE: You are a highly intuitive, wise Mongolian Shaman (Удган) who specializes in destiny, karma, and love numerology. Tone: Mystical, Grounded, and Wise. You act as a spiritual guide reading their destiny, using ancient Mongolian phrasing (e.g., заяа тавилан, төөрөг, хүрд, мандал, үйл).
+  LANGUAGE: Proper Mongolian Cyrillic ONLY. STRICTLY NO KOREAN OR ENGLISH WORDS (Translate "vibration/frequency" to "эрчим/мандал").
+
+  >>> MASTER RULES (STRICTLY ENFORCED): <<<
+  1. ZERO META-TALK: NEVER use phrases like "Энэ хэсэгт бид...", "Дүгнэж хэлэхэд...", "Энэ хэсэг нь...", "Таны тайлан". Start your spiritual reading IMMEDIATELY in the very first sentence.
+  2. PERSONA LIMITS: DO NOT use the phrases "Удган ээж нь" or "Ээж нь" AT ALL. You may use "Үр минь" extremely sparingly (max 1 or 2 times in the entire output), but prefer addressing them directly or neutrally.
+  3. STRICT MONGOLIAN APPEARANCE: When describing a person, NEVER use foreign features (e.g., blue eyes, green eyes, yellow hair). ALWAYS describe them with Mongolian features (dark/brown eyes, dark hair, mongolian physique).
+  4. OPPOSITE GENDER: If the user is MALE (Эрэгтэй), describe their future partner as FEMALE (Эмэгтэй, бүсгүй). If the user is FEMALE (Эмэгтэй), describe their future partner as MALE (Эрэгтэй, залуу).
+  5. NO MODERN WORDS OR JOBS: NEVER use modern terms like IT, engineer, manager, yoga, psychologist, accountant. STRICTLY BAN the words "Лапис Лазули", "Lapis Lazuli", "Аметист", "Amethyst" completely, even in brackets. Use traditional concepts like "гарын уртай, тооцоо данс барьдаг, хүн анагаах үйлстэй, төрийн албатай" and traditional Mongolian crystals only (e.g., мана, гартаам, оюу, номин, бадмаараг, чүнчигноров).
+  6. NO REPETITION: Each section must provide unique information. Do not repeat the same psychological advice over and over.
+  7. STRICT FORMATTING & SUBTITLES:
+     - DO NOT invent or duplicate section headers. NEVER write a section from a future part (e.g., if you are writing Part 1, NEVER write Part 2 subtitles).
+     - Write EXACTLY the Numbered Main Header first, then the EXACT Subtitles given in the prompt.
+     - Stop writing completely after finishing your assigned sections. Do NOT append rogue paragraphs or headers at the end.
+     - Do NOT use Markdown headers like (#, ##) or bold formatting (**text**) for subtitles. Just plain text.
+     - NO bullet points or asterisks (*, -).
+  8. STRICT EMOJI RULE: The paragraph immediately following a subtitle MUST start with EXACTLY ONE emoji. ZERO exceptions. Do NOT use emojis on the subtitle line itself, and do NOT use them in the middle or end of sentences.
+  9. COMPLETENESS: NEVER cut off mid-sentence. Always finish your thoughts and provide a complete, well-rounded conclusion.
+  `;
+
+  // 1st CALL: Part 1 - DNA & Archetype
+  const prompt1 = `
+  ${SYSTEM_PROMPT}
+  TASK: Write PART 1 ONLY (Love DNA - Shaman version). DO NOT proceed to Part 2.
+
+  DATA:
+  - Амьдралын замын тоо (Life Path): ${data.lifePath}
+  - Пифагорын матриц давтамж: ${data.matrixStr} (Анхаарах: 1, 2, эсвэл өөр ямар тоо их давтагдсан байна тэр нь давамгай зан чанарыг илтгэнэ)
+  - Төрсөн өдрийн тоо (Love Language): ${data.dayNumber}
+  - Хүйс: ${data.gender}
+
+  INSTRUCTIONS: First line MUST be exactly: "I ХЭСЭГ ЗҮРХНИЙ ХҮРДИЙН ТӨӨРӨГ". Then double line break.
+  Write EXACTLY 3 sections. For each section, provide the SUBTITLE on its own line, followed by a double line break, followed by the content paragraph starting with an emoji.
+  Section 1 Subtitle: "Заяагдсан араншин" - Analyze their Life Path number and what archetype they are in love, using shamanic phrasing.
+  Section 2 Subtitle: "Сүнсний өгөгдөл" - Analyze their matrix frequencies (especially repeating numbers like 1s, 2s or 8s) and what power/shadow traits it gives them.
+  Section 3 Subtitle: "Хайрын хэлний учир" - Analyze their day number (${data.dayNumber}) to define their primary love language and how they need to be loved.
+
+  STYLE GUIDE REFERENCE (Model your structure, depth, and tone exactly after this):
+  ${CONFIG.REFERENCES.PART_1}
+  `;
+  const r1 = callGeminiAPI(prompt1, apiKey, CONFIG.TEMPERATURE);
+
+  // 2nd CALL: Part 2 - Why Single & Red Flags
+  const prompt2 = `
+  ${SYSTEM_PROMPT}
+  TASK: Write PART 2 ONLY (Why single & Red Flags - Shaman version). DO NOT proceed to Part 3.
+
+  DATA:
+  - Кармын өр (Karmic Debt): ${data.karmicDebt.length > 0 ? data.karmicDebt.join(', ') : 'Байхгүй (Цагаан цаас)'}
+  - Матрицын цоорхой (Missing numbers): ${data.missing.join(', ') || 'Байхгүй'}
+  - Амьдралын зам: ${data.lifePath}
+  - Хүйс: ${data.gender}
+
+  INSTRUCTIONS: First line MUST be exactly: "II ХЭСЭГ ҮЙЛИЙН ҮР БА ГАЦАА". Then double line break.
+  Write EXACTLY 4 sections with subtitles on their own lines, followed by content paragraphs starting with an emoji.
+  Section 1 Subtitle: "Кармын өр" - Explain if they have karmic debt affecting love, or if they are a "clean slate" and it's just their choices.
+  Section 2 Subtitle: "Төөргийн гацаа" - Explain what the missing numbers (${data.missing.join(', ')}) mean in relationships. Explain exactly where their relationships usually break down.
+  Section 3 Subtitle: "Эрчмийн харшил" - Warn them about the specific types of people/energies they should completely avoid, based on their chart.
+  Section 4 Subtitle: "Аз уу, сорилт уу?" - Conclude whether their current single status is actually a blessing in disguise to find themselves or a karmic challenge they need to overcome.
+
+  STYLE GUIDE REFERENCE (Model your structure, depth, and tone exactly after this):
+  ${CONFIG.REFERENCES.PART_2}
+  `;
+  const r2 = callGeminiAPI(prompt2, apiKey, CONFIG.TEMPERATURE);
+
+  // 3rd CALL: Part 3 - Partner Avatar
+  const prompt3 = `
+  ${SYSTEM_PROMPT}
+  TASK: Write PART 3 ONLY (Future Partner Avatar - Shaman version). DO NOT write ANY information that belongs in Part 4. Do not talk about the future timeline or if they have met already. DO NOT write about specific years (e.g. 2026, 2027).
+
+  DATA:
+  - Амьдралын зам: ${data.lifePath}
+  - Матрицын цоорхой (Missing numbers that need filling): ${data.missing.join(', ') || 'Байхгүй'}
+  - Хүйс: ${data.gender} (IMPORTANT: If the user is ${data.gender}, describe the OPPOSITE gender for their partner).
+
+  INSTRUCTIONS: First line MUST be exactly: "III ХЭСЭГ ЗАЯАНЫ ХАНИЙН ДҮР". Then double line break.
+  Write EXACTLY 4 sections with subtitles on their own lines, followed by content paragraphs starting with an emoji. YOU MUST STOP COMPLETELY AFTER THE 4TH SECTION.
+  Section 1 Subtitle: "Сүнсний зохицол ба Зан чанар" - Describe the inner world, personality, and soul connection of the partner. Ensure gender is opposite of the user.
+  Section 2 Subtitle: "Гадаад төрхийн шинж" - A psychological projection of their aura and physical presence. MUST be strict Mongolian features (dark eyes, dark hair). No western features.
+  Section 3 Subtitle: "Эд хөрөнгө ба Ажил үйлс" - Are they wealthy, poor, or will they build wealth together? Use traditional Mongolian job descriptions (e.g. гарын уртай, төрийн алба, анагаагч, тооцоо данс). NO MODERN JOBS.
+  Section 4 Subtitle: "Насны эрчим ба Алтан тоо" - Will the partner be older, younger, or the same age? What birth dates (numbers) will mathematically balance the user? STRICT RULE: Do NOT add any extra paragraphs after this section. DO NOT mention "Хэдийнээ учирсан уу" or "IV ХЭСЭГ".
+
+  STYLE GUIDE REFERENCE (Model your structure, depth, and tone exactly after this):
+  ${CONFIG.REFERENCES.PART_3}
+  `;
+  const r3 = callGeminiAPI(prompt3, apiKey, CONFIG.TEMPERATURE);
+
+  // 4th CALL: Part 4 - Future Timeline
+  const prompt4 = `
+  ${SYSTEM_PROMPT}
+  TASK: Write PART 4 ONLY (Love Timeline - Shaman version). Do not include any title from Part 3.
+
+  DATA:
+  - Амьдралын зам: ${data.lifePath} (CRITICAL: DO NOT hallucinate this number. It is EXACTLY ${data.lifePath})
+  - ${data.personalYears[0].year} он: Хувийн жил ${data.personalYears[0].py}
+  - ${data.personalYears[1].year} он: Хувийн жил ${data.personalYears[1].py}
+  - ${data.personalYears[2].year} он: Хувийн жил ${data.personalYears[2].py}
+
+  INSTRUCTIONS: First line MUST be exactly: "IV ХЭСЭГ УЧРАЛЫН ЦАГ ХУГАЦАА". Then double line break.
+  Write EXACTLY 4 sections. DO NOT duplicate subtitles. DO NOT add standalone subtitles before the main header.
+  Section 1 Subtitle MUST be exactly: "Хэдийнээ учирсан уу?" - Based on their energy, have they already met this person in the past, or is it someone completely new coming? Give a mystical prediction.
+  Section 2 Subtitle MUST be exactly: "${data.personalYears[0].year} оны төөрөг" - Analyze this personal year for love.
+  Section 3 Subtitle MUST be exactly: "${data.personalYears[1].year} оны төөрөг" - Analyze this personal year for love.
+  Section 4 Subtitle MUST be exactly: "${data.personalYears[2].year} оны төөрөг" - Analyze this personal year for love.
+  (Note: PY 1=New Beginnings, 2=Partnership, 3=Social/Fun, 4=Stability/Building, 5=Change/Freedom, 6=Family/Love, 7=Spiritual/Inner, 8=Power/Karma, 9=Endings/Clearing).
+
+  STYLE GUIDE REFERENCE (Model your structure, depth, and tone exactly after this):
+  ${CONFIG.REFERENCES.PART_4}
+  `;
+  const r4 = callGeminiAPI(prompt4, apiKey, CONFIG.TEMPERATURE);
+
+  // 5th CALL: Part 5 - Final Key to Success
+  const prompt5 = `
+  ${SYSTEM_PROMPT}
+  TASK: Write PART 5 ONLY (Key to Success - Shaman version).
+
+  DATA:
+  - Амьдралын зам: ${data.lifePath} (CRITICAL: Remember this is ${data.lifePath})
+  - Хүйс: ${data.gender}
+
+  INSTRUCTIONS: Begin exactly with "V ХЭСЭГ ЗАЯАГ ТЭГШЛЭХ НУУЦ ТҮЛХҮҮР" on its own line, then double line break.
+  Write 4 distinct sections with subtitles on their own lines, followed by content paragraphs starting with an emoji.
+  Section 1 Subtitle: "Ухаарал ба Засал" - Give them a practical psychological strategy (zaasal) to overcome their main flaw.
+  Section 2 Subtitle: "Зүрхний тарни" - Provide 3 powerful, specific affirmations tailored to heal their blockages. For the affirmations themselves, include them inside the paragraph naturally, separating them with commas or semicolons, rather than placing them on new lines. Use natural, nature-based language.
+  Section 3 Subtitle: "Аз дуудах өнгө, чулуу" - Recommend a specific color and crystal based on their energy needs.
+  Section 4 Subtitle: "Удганы эцсийн үг" - A powerful, grounding closing statement. Remind them their fate is in their hands. DO NOT USE "Үр минь".
+
+  STYLE GUIDE REFERENCE (Model your structure, depth, and tone exactly after this):
+  ${CONFIG.REFERENCES.PART_5}
+  `;
+  const r5 = callGeminiAPI(prompt5, apiKey, CONFIG.TEMPERATURE);
+
+  return {
+    text: r1.text.trim() + "\n\n" + r2.text.trim() + "\n\n" + r3.text.trim() + "\n\n" + r4.text.trim() + "\n\n" + r5.text.trim(),
+    usage: (r1.usage||0) + (r2.usage||0) + (r3.usage||0) + (r4.usage||0) + (r5.usage||0)
+  };
+}
+
+// ==========================================
+// 4. API & SAFE PDF DELIVERY ENGINE
+// ==========================================
+function callGeminiAPI(prompt, apiKey, temp, requireJson = false) {
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${CONFIG.GEMINI_MODEL}:generateContent?key=${apiKey}`;
+
+  let payload = {
+    "contents": [{ "parts": [{ "text": prompt }] }],
+    "generationConfig": { "temperature": temp, "maxOutputTokens": 8192 },
+    "safetySettings": [
+        { "category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_ONLY_HIGH" },
+        { "category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_ONLY_HIGH" },
+        { "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_ONLY_HIGH" },
+        { "category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_ONLY_HIGH" }
+    ]
+  };
+
+  if (requireJson) payload.generationConfig.responseMimeType = "application/json";
+
+  const maxAttempts = 3;
+  let lastErrorMsg = "";
+
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    const res = UrlFetchApp.fetch(url, { "method": "post", "contentType": "application/json", "payload": JSON.stringify(payload), "muteHttpExceptions": true });
+
+    if (res.getResponseCode() === 429 || res.getResponseCode() >= 500) {
+        lastErrorMsg = res.getContentText();
+        Utilities.sleep(attempt * 2000); // 2s, then 4s wait
+        continue;
+    }
+
+    try {
+        const json = JSON.parse(res.getContentText());
+        if (json.candidates && json.candidates[0].content) {
+            return {
+                text: json.candidates[0].content.parts[0].text,
+                usage: json.usageMetadata ? json.usageMetadata.totalTokenCount : 0
+            };
+        }
+        lastErrorMsg = res.getContentText();
+    } catch(e) {
+        lastErrorMsg = e.toString() + " | " + res.getContentText();
+        Utilities.sleep(attempt * 2000);
+    }
+  }
+
+  throw new Error(`Gemini API Error after ${maxAttempts} attempts: ${lastErrorMsg}`);
+}
+
+function createPdfSafely(name, content, templateId, folderId) {
+  const targetFolder = DriveApp.getFolderById(folderId);
+  const copyFile = DriveApp.getFileById(templateId).makeCopy(`${name} - ${CONFIG.PRODUCT_NAME}`, targetFolder);
+  const copyId = copyFile.getId();
+
+  const doc = DocumentApp.openById(copyId);
+  const body = doc.getBody();
+
+  body.replaceText("(?i){{name}}", name);
+
+  let cleanText = content.replace(/\*/g, "");
+  cleanText = cleanText.replace(/^#+\s/gm, "");
+
+  const paragraphs = cleanText.split(/\n+/);
+  for (let i = 0; i < paragraphs.length; i++) {
+    let pText = paragraphs[i].trim();
+    if (pText.length > 0) {
+      const firstCharMatch = pText.match(/^[\u{1F300}-\u{1F6FF}\u{1F900}-\u{1F9FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}\u{1F1E6}-\u{1F1FF}\u{1F200}-\u{1F2FF}]/u);
+      let firstEmoji = firstCharMatch ? firstCharMatch[0] : "";
+      let noEmojiText = pText.replace(/[\u{1F300}-\u{1F6FF}\u{1F900}-\u{1F9FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}\u{1F1E6}-\u{1F1FF}\u{1F200}-\u{1F2FF}]/gu, "");
+      paragraphs[i] = (firstEmoji + " " + noEmojiText).trim();
+    }
+  }
+
+  // Rule 6: Locate and replace the EXACT placeholder safely
+  let insertionIndex = -1;
+  let textAttributes = {};
+  let paragraphToReplace = null;
+
+  const searchResult = body.findText("(?i){{\\s*report\\s*}}");
+
+  if (searchResult) {
+    const element = searchResult.getElement();
+    const textElement = element.asText();
+
+    // Extract exact font formatting to inherit
+    textAttributes = textElement.getAttributes();
+
+    paragraphToReplace = element.getParent();
+    insertionIndex = body.getChildIndex(paragraphToReplace);
+  } else {
+    insertionIndex = body.getNumChildren() - 1;
+  }
+
+  for (let i = paragraphs.length - 1; i >= 0; i--) {
+    let pText = paragraphs[i].trim();
+    if (pText.length > 0) {
+        let p = body.insertParagraph(insertionIndex, pText);
+
+        // Inherit user's custom font and size from {{report}} placeholder
+        let pTextElement = p.editAsText();
+
+        // Clean inherited attributes to only keep FontFamily and FontSize
+        if (textAttributes[DocumentApp.Attribute.FONT_FAMILY]) {
+            pTextElement.setFontFamily(textAttributes[DocumentApp.Attribute.FONT_FAMILY]);
+        }
+        if (textAttributes[DocumentApp.Attribute.FONT_SIZE]) {
+            pTextElement.setFontSize(textAttributes[DocumentApp.Attribute.FONT_SIZE]);
+        }
+
+        // Alignment
+        if (pText.length > 50) {
+            p.setAlignment(DocumentApp.HorizontalAlignment.JUSTIFY);
+        }
+
+        if (/^[IVXLC]+\s+ХЭСЭГ/.test(pText) || /^\d-р хэсэг/.test(pText)) {
+            // Only bold and slightly increase size, preserving user's font (e.g. Oswald)
+            pTextElement.setBold(true);
+            if (textAttributes[DocumentApp.Attribute.FONT_SIZE]) {
+                pTextElement.setFontSize(textAttributes[DocumentApp.Attribute.FONT_SIZE] + 2); // e.g. 13 -> 15
+            } else {
+                pTextElement.setFontSize(14);
+            }
+            p.setSpacingBefore(20);
+            p.setSpacingAfter(10);
+        } else {
+            p.setLineSpacing(1.5);
+            p.setSpacingAfter(10);
+        }
+    }
+  }
+
+  // Remove the original placeholder paragraph AFTER inserting new ones,
+  // to avoid "Can't remove the last paragraph" error.
+  if (paragraphToReplace) {
+    try {
+      paragraphToReplace.removeFromParent();
+    } catch (e) {
+      // If it's still the last paragraph in the document, we just clear its text safely.
+      paragraphToReplace.clear();
+    }
+  }
+
+  doc.saveAndClose();
+
+  const pdfBlob = copyFile.getAs('application/pdf');
+  const pdfFile = targetFolder.createFile(pdfBlob);
+  pdfFile.setName(`${name} - Тайлан.pdf`);
+  pdfFile.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+
+  copyFile.setTrashed(true);
+  return pdfFile.getUrl();
+}
+
+function sendUChatProven(userNs, pdfUrl, name, token) {
+  if (!token) throw new Error("DELIVERY: UChat token байхгүй.");
+  if (!userNs) throw new Error("DELIVERY: user_ns хоосон.");
+
+  const msg = CONFIG.UCHAT.DELIVERY_MESSAGE.replace("{{NAME}}", name);
+  const btn = CONFIG.UCHAT.DELIVERY_BTN_TEXT;
+
+  const payload = {
+    user_ns: String(userNs).trim(),
+    data: {
+      version: "v1",
+      content: { messages: [ { type: "text", text: msg, buttons: [ { type: "url", caption: btn, url: pdfUrl } ] } ] }
+    }
+  };
+
+  const res = UrlFetchApp.fetch(CONFIG.UCHAT.ENDPOINT, {
+    method: "post",
+    headers: { Authorization: "Bearer " + token, "Content-Type": "application/json" },
+    payload: JSON.stringify(payload), muteHttpExceptions: true
+  });
+
+  const status = res.getResponseCode();
+  const body = res.getContentText();
+
+  if (status < 200 || status >= 300) throw new Error("DELIVERY HTTP " + status + ": " + body.substring(0, 200));
+  const json = JSON.parse(body);
+  if (json.status !== "ok" && json.success !== true) throw new Error("DELIVERY API failed: " + JSON.stringify(json));
+}
+
+// --- КОДЫН ТӨГСГӨЛ ---
